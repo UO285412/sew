@@ -1,0 +1,25 @@
+
+body {
+  font-family: Arial Black, sans-serif;
+  color: #74BDCB;
+  background-color: #A0E7E5;
+  }
+header {
+  background-color:#F8D210;
+  }
+
+h1 {
+  color: #F51720;    
+  background-color:#F8D210; 
+  text-transform: uppercase;
+  padding: 2em; 
+  text-align: center;     
+  }
+nav {
+  color: #F8D210;    
+  background-color:#010100; 
+  text-transform: uppercase;
+  padding: 2em; 
+  text-align: center;     
+  }
+
