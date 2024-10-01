@@ -8,15 +8,15 @@ header {
   }
 
 h1 {
-  color: #FFFFFF;    
-  background-color:#A0E7E5; 
+  color: #A0E7E5;    
+  background-color:#010100; 
   text-transform: uppercase;
   padding: 2em; 
   text-align: center;     
   }
 nav {
-  color: #F8D210;    
-  background-color:#010100; 
+  color:#010100;    
+  background-color:#FFFFFF; 
   text-transform: uppercase;
   padding: 2em; 
   text-align: center;     
