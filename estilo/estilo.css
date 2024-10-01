@@ -1,15 +1,15 @@
 body {
   font-family: "Arial Black", sans-serif;
-  color: #74BDCB;
+  color: #010100;
   background-color: #A0E7E5;
   }
 header {
-  background-color:#F8D210;
+  background-color:#A0E7E5;
   }
 
 h1 {
-  color: #F51720;    
-  background-color:#F8D210; 
+  color: #FFFFFF;    
+  background-color:#A0E7E5; 
   text-transform: uppercase;
   padding: 2em; 
   text-align: center;     
