@@ -1,24 +1,21 @@
+/*Especificidad: 001*/
 body {
   font-family: "Arial Black", sans-serif;
   color: #010100;
   background-color: #A0E7E5;
   }
+  /*Especificidad: 001*/
 header {
   background-color:#A0E7E5;
   }
-
+/*Especificidad: 001*/
 h1 {
   color: #A0E7E5;    
-  background-color:#010100; 
-  text-transform: uppercase;
-  padding: 2em; 
-  text-align: center;     
+  background-color:#010100;    
   }
+  /*Especificidad: 001*/
 nav {
   color:#010100;    
-  background-color:#FFFFFF; 
-  text-transform: uppercase;
-  padding: 2em; 
-  text-align: center;     
+  background-color:#FFFFFF;  
   }
 
