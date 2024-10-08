@@ -1,0 +1,22 @@
+section {
+  display: flex;
+  background-color: #A0E7E5;
+}
+header h1 {
+  margin: 0; /* Elimina el margen para que no desordene el diseño */
+}
+
+header nav {
+  display: flex; /* Aplica Flexbox a nav también para organizar sus elementos internos */
+  gap: 1rem; /* Espacio entre los elementos dentro del nav */
+}
+@media (max-width: 768px) {
+  header {
+    flex-direction: column; /* Apila h1 y nav en pantallas pequeñas */
+    align-items: flex-start; /* Alinea los elementos al inicio */
+  }
+
+  header nav {
+    width: 100%; /* Nav ocupa el 100% del ancho */
+  }
+}
