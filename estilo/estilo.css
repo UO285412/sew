@@ -6,9 +6,6 @@ body {
   background-color: #A0E7E5;
   }
 
- 
-
-
  /*Especificidad: 001*/
   /*Color por defecto de enlaces*/
   header a {
@@ -20,8 +17,6 @@ video {
  width:100%;
  height:auto;
 }
-
-
  
   /*Especificidad: 001*/
 nav {
@@ -79,6 +74,10 @@ dt {
   font-weight: bold;
   color:#0000FF
 
+}
+nav a.active{
+  color: #ff0000; /* Color rojo para el enlace activo */
+  font-weight: bold; /* Hacer el texto en negrita */
 }
 /*El color de fondo lo hereda del body*/
 /*Especificidad: (0, 0, 2)*/
