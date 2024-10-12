@@ -75,6 +75,8 @@ dt {
   color:#0000FF
 
 }
+/*El color lo hereda de nav*/
+/*Especificidad: (0, 1, 2)*/
 nav a.active{
   color: #ff0000; /* Color rojo para el enlace activo */
   font-weight: bold; /* Hacer el texto en negrita */
