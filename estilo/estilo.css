@@ -42,12 +42,16 @@ th, td {
   text-align: left; /* Alineación de texto */
 }
 
-
+/*Especificidad: (0, 1, 3)*/
+/*El color de fondo es el que hereda de body*/ 
+main >section:last-child a{
+  color: #161a98;
+}
 
 /*Especificidad: (0, 2, 3)*/
-/*El color de primer plano es el que traen por defecto los enlaces*/ 
+/*El color de primer plano es el que hereda de main >section:last-child a*/ 
 main >section:last-child a:hover{
-  background: yellow;
+  background: #ffff00;
 }
 
 
@@ -65,20 +69,20 @@ ul {
 /*El color de fondo lo hereda de body*/
 /*Especificidad: (0, 0, 1)*/
 dd{
-  color:#df2020
+  color:#541006
 }
 /*El color de fondo lo hereda de body*/
 /*Especificidad: (0, 0, 1)*/
 dt {
   line-height: 1.5;
   font-weight: bold;
-  color:#0000FF
+  color:#000055
 
 }
-/*El color lo hereda de nav*/
+/*El color de fondo lo hereda de nav*/
 /*Especificidad: (0, 1, 2)*/
 nav a.active{
-  color: #ff0000; /* Color rojo para el enlace activo */
+  color: #A11B7E; /* Color rojo para el enlace activo */
   font-weight: bold; /* Hacer el texto en negrita */
 }
 /*El color de fondo lo hereda del body*/
@@ -90,9 +94,9 @@ nav a {
 /*Especificidad: (0, 1, 2)*/
 /*El color de fondo lo hereda de body*/
 nav a:focus{
-  color: #df2020; /* Color destacado para el enlace activo */
+  color: #A11B7E; /* Color destacado para el enlace activo */
   font-weight: bold; /* Opcional: hacer el enlace más grueso */
-  border-bottom: 2px solid #df2020; /* Opcional: subrayar el enlace activo */
+  border-bottom: 2px solid #A11B7E; /* Opcional: subrayar el enlace activo */
 }
 
 /* Media query para pantallas pequeñas (móviles y tabletas) */
