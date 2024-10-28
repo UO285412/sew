@@ -1,119 +1,119 @@
-/*Nestor Fernandez Garcia UO285412*/
-/*Especificidad: 001*/
+/* Nestor Fernandez Garcia UO285412 */
+/* Especificidad: 001 */
 body {
   font-family: "Arial Black", sans-serif;
   color: #010100;
   background-color: #A0E7E5;
-  }
+}
 
- /*Especificidad: 001*/
-  /*Color por defecto de enlaces*/
-  header a {
-    text-decoration-line:none;
-    
-    }
- /*Especificidad: 001*/
+/* Especificidad: 001 */
+/* Color por defecto de enlaces */
+header a {
+  text-decoration-line: none;
+}
+
+/* Especificidad: 001 */
 video {
- width:100%;
- height:auto;
+  width: 100%;
+  height: auto;
 }
- 
-  /*Especificidad: 001*/
+
+/* Especificidad: 001 */
 nav {
-  color:#010100;    
-  background-color:#FFFFFF;  
-  }
-
-/*Escpecificad: 002*/
-body >p{
-font-size:0.8em
+  color: #010100;    
+  background-color: #FFFFFF;  
 }
 
- /*Especificidad: 001*/
+/* Especificidad: 002 */
+body > p {
+  font-size: 0.8rem;
+}
+
+/* Especificidad: 001 */
 table {
   width: 100%; /* Asegura que la tabla ocupe el 100% del ancho disponible */
   border-collapse: collapse; /* Elimina los espacios entre las celdas */
-  border: 3px solid purple; /* Borde de la tabla */
+  border: 0.2rem solid purple; /* Borde de la tabla */
 }
-/*Especificidad: (0, 0, 1)*/
+
+/* Especificidad: (0, 0, 1) */
 th, td {
-  border: 1px solid purple; /* Borde para las celdas */
-  padding: 10px; /* Espaciado interno */
+  border: 0.1rem solid purple; /* Borde para las celdas */
+  padding: 0.625rem; /* Espaciado interno */
   text-align: left; /* Alineación de texto */
 }
 
-/*Especificidad: (0, 1, 3)*/
-/*El color de fondo es el que hereda de body*/ 
-main >section:last-child a{
+/* Especificidad: (0, 1, 3) */
+/* El color de fondo es el que hereda de body */
+main > section:last-child a {
   color: #161a98;
 }
 
-/*Especificidad: (0, 2, 3)*/
-/*El color de primer plano es el que hereda de main >section:last-child a*/ 
-main >section:last-child a:hover{
+/* Especificidad: (0, 2, 3) */
+/* El color de primer plano es el que hereda de main >section:last-child a */
+main > section:last-child a:hover {
   background: #ffff00;
 }
 
-
-
-
-/*Especificidad: (0, 0, 1)*/
+/* Especificidad: (0, 0, 1) */
 ol {
   list-style-type: upper-roman;
 }
-/*Especificidad: (0, 0, 1)*/
+
+/* Especificidad: (0, 0, 1) */
 ul {
   padding-left: 3rem;
   list-style-type: none;
 }
-/*El color de fondo lo hereda de body*/
-/*Especificidad: (0, 0, 1)*/
-dd{
-  color:#541006
+
+/* El color de fondo lo hereda de body */
+/* Especificidad: (0, 0, 1) */
+dd {
+  color: #541006;
 }
-/*El color de fondo lo hereda de body*/
-/*Especificidad: (0, 0, 1)*/
+
+/* El color de fondo lo hereda de body */
+/* Especificidad: (0, 0, 1) */
 dt {
   line-height: 1.5;
   font-weight: bold;
-  color:#000055
-
+  color: #000055;
 }
-/*El color de fondo lo hereda de nav*/
-/*Especificidad: (0, 1, 2)*/
-nav a.active{
+
+/* El color de fondo lo hereda de nav */
+/* Especificidad: (0, 1, 2) */
+nav a.active {
   color: #A11B7E; /* Color rojo para el enlace activo */
   font-weight: bold; /* Hacer el texto en negrita */
 }
-/*El color de fondo lo hereda del body*/
-/*Especificidad: (0, 0, 2)*/
+
+/* El color de fondo lo hereda del body */
+/* Especificidad: (0, 0, 2) */
 nav a {
   text-decoration: none;
   color: #010100; 
 }
-/*Especificidad: (0, 1, 2)*/
-/*El color de fondo lo hereda de body*/
-nav a:focus{
+
+/* Especificidad: (0, 1, 2) */
+/* El color de fondo lo hereda de body */
+nav a:focus {
   color: #A11B7E; /* Color destacado para el enlace activo */
   font-weight: bold; /* Opcional: hacer el enlace más grueso */
-  border-bottom: 2px solid #A11B7E; /* Opcional: subrayar el enlace activo */
+  border-bottom: 0.125rem solid #A11B7E; /* Opcional: subrayar el enlace activo */
 }
 
 /* Media query para pantallas pequeñas (móviles y tabletas) */
-/*Especificidad: (0, 0, 1)*/
+/* Especificidad: (0, 0, 1) */
 @media (max-width: 465px) {
   header {
     flex-direction: column; /* Apilar h1 y nav verticalmente */
     align-items: flex-start; /* Alinear los elementos al inicio */
   }
-
-  
-
- 
 }
-/*Especificidad: (0, 0, 2)*/
+
+/* Especificidad: (0, 0, 2) */
 @media screen and (max-width: 465px) {
- body> p {
+  body > p {
     display: none; /* Ocultar migas de navegación en pantallas pequeñas */
   }
 }
