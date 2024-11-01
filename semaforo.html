@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Reacción - Semáforo</title>
+    <link rel="stylesheet" href="styles/semaforo_grid.css">
+</head>
+<body>
+    <main>
+        <h1>Semáforo</h1>
+        <section class="semaforo">
+            <!-- Cuatro luces del semáforo -->
+            <div class="luz"></div>
+            <div class="luz"></div>
+            <div class="luz"></div>
+            <div class="luz"></div>
+        </section>
+        <div class="controls">
+            <button id="startButton" type="button">Arranque</button>
+            <button id="reactionButton" type="button" disabled>Reacción</button>
+        </div>
+        <p id="reactionTime">Tiempo de reacción: --</p>
+    </main>
+    <script src="js/semaforo.js"></script>
+</body>
+</html>

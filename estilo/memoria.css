@@ -1,0 +1,82 @@
+/* Estilos generales */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Contenedor principal */
+main {
+    text-align: center;
+}
+
+/* Título */
+h1 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Sección de cartas */
+section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Cuatro columnas */
+    gap: 1rem; /* Espacio entre cartas */
+    justify-content: center;
+}
+
+/* Estilo de cada carta */
+section > article {
+    background-color: #0066cc; /* Color de fondo de la carta */
+    width: 100%; /* Ancho de la carta relativo */
+    aspect-ratio: 5 / 7; /* Relación de aspecto para mantener la forma */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s;
+    cursor: pointer;
+    backface-visibility: hidden;
+    
+}
+
+/* Frente y reverso de la carta */
+section > article > h3, section > article > img {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 0.5rem;
+    backface-visibility: hidden;
+    color: #0066cc;
+    background-color: #0066cc;
+}
+
+/* Mostrar el frente (texto) */
+section > article > h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    background-color: #0066cc;
+   
+    
+}
+
+/* Imagen (reverso) */
+section > article > img {
+    transform: rotateY(180deg);
+    
+}
+
+/* Carta volteada */
+section > article.flip {
+    transform: rotateY(180deg);
+   
+}

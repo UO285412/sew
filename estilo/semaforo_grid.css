@@ -1,0 +1,61 @@
+/* Estilos generales */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Contenedor principal */
+main {
+    display: grid;
+    grid-template-rows: auto auto auto auto;
+    gap: 1.5rem;
+    text-align: center;
+    width: 60vw;
+}
+
+/* Título */
+h1 {
+    font-size: 2.5rem;
+}
+
+/* Semáforo */
+.semaforo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    justify-items: center;
+}
+
+/* Luces del semáforo */
+.luz {
+    background-color: #0007; /* Fondo apagado */
+    width: 5rem; /* Tamaño explícito */
+    height: 5rem;
+    border-radius: 50%;
+    border: 0.5rem solid #000;
+    transition: background-color 0.3s;
+}
+
+/* Botones de control */
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+button {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+/* Texto de resultado */
+#reactionTime {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
