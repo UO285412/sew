@@ -1,4 +1,5 @@
 /* Estilos generales */
+/*Especificidad (0,0,1)*/
 body {
     display: flex;
     justify-content: center;
@@ -10,6 +11,7 @@ body {
 }
 
 /* Contenedor principal */
+/*Especificidad (0,0,1)*/
 main {
     display: grid;
     grid-template-rows: auto auto auto auto;
@@ -19,11 +21,13 @@ main {
 }
 
 /* Título */
+/*Especificidad (0,0,1)*/
 h1 {
     font-size: 2.5rem;
 }
 
 /* Semáforo */
+/*Especificidad (0,1,0)*/
 .semaforo {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -32,6 +36,7 @@ h1 {
 }
 
 /* Luces del semáforo */
+/*Especificidad (0,1,0)*/
 .luz {
     background-color: #0007; /* Fondo apagado */
     width: 5rem; /* Tamaño explícito */
@@ -42,12 +47,13 @@ h1 {
 }
 
 /* Botones de control */
+/*Especificidad (0,1,0)*/
 .controls {
     display: flex;
     justify-content: center;
     gap: 1rem;
 }
-
+/*Especificidad (0,0,1)*/
 button {
     padding: 0.5rem 1rem;
     font-size: 1rem;
@@ -55,6 +61,7 @@ button {
 }
 
 /* Texto de resultado */
+/*Especificidad (1,0,0)*/
 #reactionTime {
     font-size: 1.5rem;
     margin-top: 1rem;

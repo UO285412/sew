@@ -1,4 +1,6 @@
 /* Estilos generales */
+/*Especificidad (0,0,1)*/
+/*Color de primer plano es el de las cartas*/
 body {
     display: flex;
     flex-direction: column;
@@ -11,17 +13,20 @@ body {
 }
 
 /* Contenedor principal */
+/*Especificidad (0,0,1)*/
 main {
     text-align: center;
 }
 
 /* Título */
+/*Especificidad (0,0,1)*/
 h1 {
     font-size: 2rem;
     margin-bottom: 2rem;
 }
 
 /* Sección de cartas */
+/*Especificidad (0,0,1)*/
 section {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* Cuatro columnas */
@@ -30,6 +35,7 @@ section {
 }
 
 /* Estilo de cada carta */
+/*Especificidad (0,0,2)*/
 section > article {
     background-color: #0066cc; /* Color de fondo de la carta */
     width: 100%; /* Ancho de la carta relativo */
@@ -47,18 +53,19 @@ section > article {
 }
 
 /* Frente y reverso de la carta */
+/*Especificidad (0,0,3)*/
 section > article > h3, section > article > img {
     position: absolute;
     width: 100%;
     height: 100%;
     backface-visibility: hidden;
     border-radius: 0.5rem;
-    backface-visibility: hidden;
     color: #0066cc;
     background-color: #0066cc;
 }
 
 /* Mostrar el frente (texto) */
+/*Especificidad (0,0,3)*/
 section > article > h3 {
     display: flex;
     justify-content: center;
@@ -70,12 +77,14 @@ section > article > h3 {
 }
 
 /* Imagen (reverso) */
+/*Especificidad (0,0,3)*/
 section > article > img {
     transform: rotateY(180deg);
     
 }
 
 /* Carta volteada */
+/*Especificidad (0,1,2)*/
 section > article.flip {
     transform: rotateY(180deg);
    
