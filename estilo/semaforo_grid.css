@@ -1,68 +1,114 @@
-/* Estilos generales */
-/*Especificidad (0,0,1)*/
-body {
-    display: flex;
-    justify-content: center;
+/* Miguel Fernández Huerta UO287577 */
+
+/* Especificidad (001) */
+section {
+    background-color: #FFFFFFFF;
+    color: #000000;
+
+    width: 65%;
+    height: 50%;
+    margin: 5% auto auto auto; /* Situamos la sección que contiene el juego del semáforo en el centro vertical de la página con un margen superior del 5% para que haya una separación con el nav de los links a los demás juegos */
+
+    display: grid;
+    grid-template-columns: repeat(4, 23%);
+    grid-template-rows: 0.5fr 1fr 0.5fr 0.5fr;
+    gap: 5% 3%;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
 }
 
-/* Contenedor principal */
-/*Especificidad (0,0,1)*/
-main {
-    display: grid;
-    grid-template-rows: auto auto auto auto;
-    gap: 1.5rem;
-    text-align: center;
-    width: 60vw;
+/* Especificidad (001) */
+h2 {
+    grid-column: 1 / -1; /* Con esta configuración nos aseguramos de que la fila del h2 en el grid layout empiece en la primera columna y acabe en la última => ocupa toda la fila */
+    text-align: center; /* Para centrar el texto del h2 en la fila que lo contiene */
 }
 
-/* Título */
-/*Especificidad (0,0,1)*/
-h1 {
-    font-size: 2.5rem;
+/* Especificidad (001) */
+div {
+    background-color: #000A; /* Color de fondo de la luz (inicialmente está apagado, por tanto, lo simulamos con el color gris) | PROPIEDAD NO HEREDABLE */
+    /*color: #000000 heredado de section | PROPIEDAD HEREDABLE */
+    border: 0.5em solid #000000; /* Borde de la luz del semáforo */
+    aspect-ratio: 1; /* Mismo alto y ancho */
+    border-radius: 50%; /* Redondear los bordes asignando un porcentaje de 50% ocasiona que el div pase a dibujar una circunferencia */
 }
 
-/* Semáforo */
-/*Especificidad (0,1,0)*/
-.semaforo {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.5rem;
-    justify-items: center;
-}
-
-/* Luces del semáforo */
-/*Especificidad (0,1,0)*/
-.luz {
-    background-color: #0007; /* Fondo apagado */
-    width: 5rem; /* Tamaño explícito */
-    height: 5rem;
-    border-radius: 50%;
-    border: 0.5rem solid #000;
-    transition: background-color 0.3s;
-}
-
-/* Botones de control */
-/*Especificidad (0,1,0)*/
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-}
-/*Especificidad (0,0,1)*/
+/* Especificidad (001) */
 button {
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
+    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
     cursor: pointer;
 }
 
-/* Texto de resultado */
-/*Especificidad (1,0,0)*/
-#reactionTime {
-    font-size: 1.5rem;
-    margin-top: 1rem;
+/* Especificidad (011) */
+button:first-of-type {
+    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
+    grid-column: 2 / span 1;
+}
+
+/* Especificidad (011) */
+button:nth-of-type(2) {
+    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
+    grid-column: 3 / span 1;
+}
+
+/* Especificidad (004) */
+body > main > section > p {
+    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
+    grid-column: 2 / span 1;
+}
+
+@keyframes out {
+    from 
+    {
+        background-color: #FF0000; /* PROPIEDAD NO HEREDABLE */
+    } to 
+    {
+        background-color: #000A; /* PROPIEDAD NO HEREDABLE */
+    }
+}
+
+/* Especificidad (013) */
+main.unload > section > div {
+    animation-name: out;
+    animation-duration: 0.1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes turnOn {
+    from 
+    {
+        background-color: #000A; /* Redefinición de la propiedad | PROPIEDAD NO HEREDABLE */
+    } to 
+    {
+        background-color: #FF0000; /* Redefinición de la propiedad | PROPIEDAD NO HEREDABLE */
+    }
+}
+
+/* Especificidad (023) */
+main.load > section > div:first-of-type {
+    animation-name: turnOn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+/* Especificidad (023) */
+main.load > section > div:nth-of-type(2) {
+    animation-name: turnOn;
+    animation-delay: 0.5s;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+/* Especificidad (023) */
+main.load > section > div:nth-of-type(3) {
+    animation-name: turnOn;
+    animation-delay: 1s;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+/* Especificidad (023) */
+main.load > section > div:nth-of-type(4) {
+    animation-name: turnOn;
+    animation-delay: 1.5s;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
 }

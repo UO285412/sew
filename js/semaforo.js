@@ -1,53 +1,96 @@
+/* Nestor Fernandez Garcia UO287577 */
+
 class Semaforo {
     constructor() {
-        this.lights = document.querySelectorAll('.luz');
-        this.startButton = document.getElementById('startButton');
-        this.reactionButton = document.getElementById('reactionButton');
-        this.reactionTimeDisplay = document.getElementById('reactionTime');
-        this.levels = [0.2, 0.5, 0.8];
-        this.unload_moment = null;
-        this.clic_moment = null;
-        this.difficulty = this.levels[Math.floor(Math.random() * this.levels.length)];
-
-        this.startButton.addEventListener('click', () => this.initSequence());
-        this.reactionButton.addEventListener('click', () => this.stopReaction());
+        this.levels = [0.2, 0.5, 0.8]; // Dificultades del juego
+        this.lights = 4; // Número de luces
+        this.unloadMoment = null; // Marca de tiempo para el inicio de la secuencia de apagado
+        this.clicMoment = null; // Marca de tiempo para la pulsación del usuario
+        this.difficulty = this.levels[Math.floor(Math.random() * this.levels.length)]; // Dificultad aleatoria
+        this.inicializarEstructura();
     }
 
-    initSequence() {
-        this.startButton.disabled = true;
-        let delay = 500; // Tiempo de delay entre cada luz (0.5s)
-        this.lights.forEach((light, index) => {
-            setTimeout(() => {
-                light.style.backgroundColor = 'red';
-                if (index === this.lights.length - 1) {
-                    setTimeout(() => {
-                        this.unload_moment = new Date();
-                        this.endSequence();
-                    }, this.difficulty * 1000);
-                }
-            }, delay * (index + 1));
-        });
+    inicializarEstructura() {
+        // Crear la estructura del juego dentro del elemento main
+        const main = document.querySelector('main');
+        const section = document.createElement('section');
+
+        const titulo = document.createElement('h2');
+        titulo.textContent = 'Juego del Semáforo';
+        section.appendChild(titulo);
+
+        // Crear las luces del semáforo
+        for (let i = 0; i < this.lights; i++) {
+            const luz = document.createElement('div');
+            section.appendChild(luz);
+        }
+
+        // Botón de arranque
+        const botonArrancar = document.createElement('button');
+        botonArrancar.type = 'button';
+        botonArrancar.textContent = 'Arranque';
+        botonArrancar.onclick = this.iniciarSecuencia.bind(this);
+        section.appendChild(botonArrancar);
+
+        // Botón de reacción
+        const botonReaccion = document.createElement('button');
+        botonReaccion.type = 'button';
+        botonReaccion.textContent = 'Reacción';
+        botonReaccion.disabled = true;
+        botonReaccion.onclick = this.detenerReaccion.bind(this);
+        section.appendChild(botonReaccion);
+
+        main.appendChild(section);
     }
 
-    endSequence() {
-        this.lights.forEach(light => {
-            light.style.backgroundColor = '#0007'; // Apagar las luces
-        });
-        this.reactionButton.disabled = false;
+    iniciarSecuencia() {
+        const main = document.querySelector('main');
+        const botonArranque = document.querySelector('section button:first-of-type');
+        const parrafoReaccion = document.querySelector('section p:last-child');
+
+        // Eliminar párrafo de tiempo de reacción previo si existe
+        if (parrafoReaccion) {
+            parrafoReaccion.remove();
+        }
+
+        main.classList.add('load');
+        botonArranque.disabled = true;
+
+        setTimeout(() => {
+            this.unloadMoment = Date.now();
+            this.finalizarSecuencia();
+        }, this.difficulty * 100 + 1500);
     }
 
-    stopReaction() {
-        this.clic_moment = new Date();
-        let reactionTime = (this.clic_moment - this.unload_moment) / 1000;
-        this.reactionTimeDisplay.textContent = `Tiempo de reacción: ${reactionTime.toFixed(3)} s`;
+    finalizarSecuencia() {
+        const main = document.querySelector('main');
+        const botonReaccion = document.querySelector('section button:nth-of-type(2)');
 
-        // Restablecer el estado de los botones
-        this.reactionButton.disabled = true;
-        this.startButton.disabled = false;
+        main.classList.remove('load');
+        main.classList.add('unload');
+        botonReaccion.disabled = false;
+    }
+
+    detenerReaccion() {
+        this.clicMoment = Date.now();
+        const tiempoReaccion = ((this.clicMoment - this.unloadMoment) / 1000).toFixed(3);
+
+        const parrafo = document.createElement('p');
+        parrafo.textContent = `Tiempo de reacción: ${tiempoReaccion} segundos`;
+
+        const section = document.querySelector('section');
+        section.appendChild(parrafo);
+
+        const main = document.querySelector('main');
+        main.classList.remove('load');
+        main.classList.remove('unload');
+
+        const botonArranque = document.querySelector('section button:first-of-type');
+        const botonReaccion = document.querySelector('section button:nth-of-type(2)');
+        botonArranque.disabled = false;
+        botonReaccion.disabled = true;
     }
 }
 
-// Inicializar el juego
-document.addEventListener('DOMContentLoaded', () => {
-    new Semaforo();
-});
+// Crear una instancia de la clase Semaforo
+const semaforo = new Semaforo();

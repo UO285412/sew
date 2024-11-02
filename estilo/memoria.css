@@ -54,6 +54,7 @@ section > article {
 
 /* Frente y reverso de la carta */
 /*Especificidad (0,0,3)*/
+/*La carta tiene el mismo color por detras que por delante*/
 section > article > h3, section > article > img {
     position: absolute;
     width: 100%;
@@ -61,7 +62,7 @@ section > article > h3, section > article > img {
     backface-visibility: hidden;
     border-radius: 0.5rem;
     color: #0066cc;
-    background-color: #0066cc;
+    background-color: #f0f0f0;
 }
 
 /* Mostrar el frente (texto) */
@@ -71,7 +72,7 @@ section > article > h3 {
     justify-content: center;
     align-items: center;
     font-size: 1.5rem;
-    background-color: #0066cc;
+    
    
     
 }
