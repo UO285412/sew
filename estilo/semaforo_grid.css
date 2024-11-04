@@ -1,114 +1,69 @@
-/* Miguel Fernández Huerta UO287577 */
-
-/* Especificidad (001) */
-section {
-    background-color: #FFFFFFFF;
-    color: #000000;
-
-    width: 65%;
-    height: 50%;
-    margin: 5% auto auto auto; /* Situamos la sección que contiene el juego del semáforo en el centro vertical de la página con un margen superior del 5% para que haya una separación con el nav de los links a los demás juegos */
-
+/* Especificidad (002) */
+main > section {
     display: grid;
-    grid-template-columns: repeat(4, 23%);
-    grid-template-rows: 0.5fr 1fr 0.5fr 0.5fr;
-    gap: 5% 3%;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 1rem;
+    justify-items: center;
     align-items: center;
 }
 
-/* Especificidad (001) */
-h2 {
-    grid-column: 1 / -1; /* Con esta configuración nos aseguramos de que la fila del h2 en el grid layout empiece en la primera columna y acabe en la última => ocupa toda la fila */
-    text-align: center; /* Para centrar el texto del h2 en la fila que lo contiene */
+/* Especificidad (003) */
+main > section h2 {
+    grid-column: span 4;
+    text-align: center;
 }
 
-/* Especificidad (001) */
-div {
-    background-color: #000A; /* Color de fondo de la luz (inicialmente está apagado, por tanto, lo simulamos con el color gris) | PROPIEDAD NO HEREDABLE */
-    /*color: #000000 heredado de section | PROPIEDAD HEREDABLE */
-    border: 0.5em solid #000000; /* Borde de la luz del semáforo */
-    aspect-ratio: 1; /* Mismo alto y ancho */
-    border-radius: 50%; /* Redondear los bordes asignando un porcentaje de 50% ocasiona que el div pase a dibujar una circunferencia */
+/* Especificidad (003) */
+main > section > button {
+    grid-column: span 2;
+    padding: 0.5rem 1rem;
 }
 
-/* Especificidad (001) */
-button {
-    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
-    cursor: pointer;
+/* Especificidad (003) */
+main > section div {
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%; /* Círculo perfecto */
+    background-color: #0004; /* Color de la luz apagada */
+    border: 2px solid #000; /* Borde más oscuro */
+    transition: background-color 0.5s; /* Transición para el encendido */
 }
 
-/* Especificidad (011) */
-button:first-of-type {
-    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
-    grid-column: 2 / span 1;
+/* Animaciones de encendido */
+/* Especificidad (022) */
+main.load div:nth-of-type(1) {
+    background-color: red;
+    animation: light-up 0.5s forwards;
+}
+/* Especificidad (022) */
+main.load div:nth-of-type(2) {
+    animation: light-up 0.5s 0.5s forwards;
+}
+/* Especificidad (022) */
+main.load div:nth-of-type(3) {
+    animation: light-up 0.5s 1s forwards;
+}
+/* Especificidad (022) */
+main.load div:nth-of-type(4) {
+    animation: light-up 0.5s 1.5s forwards;
 }
 
-/* Especificidad (011) */
-button:nth-of-type(2) {
-    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
-    grid-column: 3 / span 1;
-}
-
-/* Especificidad (004) */
-body > main > section > p {
-    /*color: #000000; heredado de section | PROPIEDAD HEREDABLE */
-    grid-column: 2 / span 1;
-}
-
-@keyframes out {
-    from 
-    {
-        background-color: #FF0000; /* PROPIEDAD NO HEREDABLE */
-    } to 
-    {
-        background-color: #000A; /* PROPIEDAD NO HEREDABLE */
+@keyframes light-up {
+    to {
+        background-color: red;
     }
 }
 
-/* Especificidad (013) */
-main.unload > section > div {
-    animation-name: out;
-    animation-duration: 0.1s;
-    animation-fill-mode: forwards;
+/* Animaciones de apagado */
+/* Especificidad (012) */
+main.unload div {
+    background-color: #0007; /* Todas las luces se apagan */
+    animation: light-off 0.1s forwards;
 }
 
-@keyframes turnOn {
-    from 
-    {
-        background-color: #000A; /* Redefinición de la propiedad | PROPIEDAD NO HEREDABLE */
-    } to 
-    {
-        background-color: #FF0000; /* Redefinición de la propiedad | PROPIEDAD NO HEREDABLE */
+@keyframes light-off {
+    to {
+        background-color: #0007;
     }
-}
-
-/* Especificidad (023) */
-main.load > section > div:first-of-type {
-    animation-name: turnOn;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-
-/* Especificidad (023) */
-main.load > section > div:nth-of-type(2) {
-    animation-name: turnOn;
-    animation-delay: 0.5s;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-
-/* Especificidad (023) */
-main.load > section > div:nth-of-type(3) {
-    animation-name: turnOn;
-    animation-delay: 1s;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-
-/* Especificidad (023) */
-main.load > section > div:nth-of-type(4) {
-    animation-name: turnOn;
-    animation-delay: 1.5s;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
 }

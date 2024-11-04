@@ -1,96 +1,90 @@
-/* Nestor Fernandez Garcia UO287577 */
-
 class Semaforo {
     constructor() {
         this.levels = [0.2, 0.5, 0.8]; // Dificultades del juego
-        this.lights = 4; // Número de luces
-        this.unloadMoment = null; // Marca de tiempo para el inicio de la secuencia de apagado
-        this.clicMoment = null; // Marca de tiempo para la pulsación del usuario
+        this.lights = 4; // Número de luces del semáforo
+        this.unloadMoment = null; // Momento de inicio de la secuencia de apagado
+        this.clickMoment = null; // Momento en el que el usuario pulsa el botón de reacción
         this.difficulty = this.levels[Math.floor(Math.random() * this.levels.length)]; // Dificultad aleatoria
-        this.inicializarEstructura();
+        this.createStructure(); // Genera la estructura del semáforo al instanciar
     }
 
-    inicializarEstructura() {
-        // Crear la estructura del juego dentro del elemento main
-        const main = document.querySelector('main');
-        const section = document.createElement('section');
+    createStructure() {
+        const main = document.querySelector("main");
+        const section = document.createElement("section");
 
-        const titulo = document.createElement('h2');
-        titulo.textContent = 'Juego del Semáforo';
-        section.appendChild(titulo);
+        // Encabezado
+        const header = document.createElement("h2");
+        header.textContent = "Semáforo";
+        section.appendChild(header);
 
-        // Crear las luces del semáforo
+        // Crear luces
         for (let i = 0; i < this.lights; i++) {
-            const luz = document.createElement('div');
-            section.appendChild(luz);
+            const light = document.createElement("div");
+            section.appendChild(light);
         }
 
         // Botón de arranque
-        const botonArrancar = document.createElement('button');
-        botonArrancar.type = 'button';
-        botonArrancar.textContent = 'Arranque';
-        botonArrancar.onclick = this.iniciarSecuencia.bind(this);
-        section.appendChild(botonArrancar);
+        const startButton = document.createElement("button");
+        startButton.textContent = "Arranque";
+        startButton.type = "button";
+        startButton.onclick = this.initSequence.bind(this);
+        section.appendChild(startButton);
 
         // Botón de reacción
-        const botonReaccion = document.createElement('button');
-        botonReaccion.type = 'button';
-        botonReaccion.textContent = 'Reacción';
-        botonReaccion.disabled = true;
-        botonReaccion.onclick = this.detenerReaccion.bind(this);
-        section.appendChild(botonReaccion);
+        const reactionButton = document.createElement("button");
+        reactionButton.textContent = "Reacción";
+        reactionButton.type = "button";
+        reactionButton.disabled = true;
+        reactionButton.onclick = this.stopReaction.bind(this);
+        section.appendChild(reactionButton);
 
         main.appendChild(section);
     }
 
-    iniciarSecuencia() {
-        const main = document.querySelector('main');
-        const botonArranque = document.querySelector('section button:first-of-type');
-        const parrafoReaccion = document.querySelector('section p:last-child');
+    arrancar() {
+        const main = document.querySelector("main");
+        main.classList.add("load"); // Añade la clase para encender las luces
 
-        // Eliminar párrafo de tiempo de reacción previo si existe
-        if (parrafoReaccion) {
-            parrafoReaccion.remove();
-        }
+        // Deshabilita el botón de arranque
+        document.querySelector("button:nth-of-type(1)").disabled = true;
 
-        main.classList.add('load');
-        botonArranque.disabled = true;
-
+        // Inicia la secuencia de apagado después de un tiempo calculado
         setTimeout(() => {
-            this.unloadMoment = Date.now();
-            this.finalizarSecuencia();
-        }, this.difficulty * 100 + 1500);
+            this.unloadMoment = new Date().getTime();
+            this.parar();
+        }, this.difficulty * 100 + 1500); // Duración total del encendido + tiempo aleatorio
     }
 
-    finalizarSecuencia() {
-        const main = document.querySelector('main');
-        const botonReaccion = document.querySelector('section button:nth-of-type(2)');
+    parar() {
+        const main = document.querySelector("main");
+        main.classList.remove("load"); // Quita la clase de encendido
+        main.classList.add("unload"); // Añade la clase para apagar las luces
 
-        main.classList.remove('load');
-        main.classList.add('unload');
-        botonReaccion.disabled = false;
+        // Habilita el botón de reacción
+        document.querySelector("button:nth-of-type(2)").disabled = false;
     }
 
-    detenerReaccion() {
-        this.clicMoment = Date.now();
-        const tiempoReaccion = ((this.clicMoment - this.unloadMoment) / 1000).toFixed(3);
+    stopReaction() {
+        this.clickMoment = new Date().getTime();
+        const reactionTime = ((this.clickMoment - this.unloadMoment) / 1000).toFixed(3); // Tiempo de reacción en segundos
 
-        const parrafo = document.createElement('p');
-        parrafo.textContent = `Tiempo de reacción: ${tiempoReaccion} segundos`;
+        // Crear y mostrar el párrafo con el tiempo de reacción
+        const paragraph = document.createElement("p");
+        paragraph.textContent = `Tiempo de reacción: ${reactionTime} segundos`;
+        document.querySelector("section").appendChild(paragraph);
 
-        const section = document.querySelector('section');
-        section.appendChild(parrafo);
+        // Quita las clases de encendido y apagado
+        const main = document.querySelector("main");
+        main.classList.remove("load");
+        main.classList.remove("unload");
 
-        const main = document.querySelector('main');
-        main.classList.remove('load');
-        main.classList.remove('unload');
-
-        const botonArranque = document.querySelector('section button:first-of-type');
-        const botonReaccion = document.querySelector('section button:nth-of-type(2)');
-        botonArranque.disabled = false;
-        botonReaccion.disabled = true;
+        // Habilita el botón de arranque y deshabilita el de reacción
+        document.querySelector("button:nth-of-type(1)").disabled = false;
+        document.querySelector("button:nth-of-type(2)").disabled = true;
     }
 }
 
-// Crear una instancia de la clase Semaforo
-const semaforo = new Semaforo();
+// Instancia el semáforo
+document.addEventListener("DOMContentLoaded", () => {
+    new Semaforo();
+});
