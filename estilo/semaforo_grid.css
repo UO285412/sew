@@ -25,7 +25,8 @@ main > section div {
     width: 100%;
     aspect-ratio: 1;
     border-radius: 50%; /* Círculo perfecto */
-    background-color: #0004; /* Color de la luz apagada */
+    background-color: #0007; /* Color de la luz apagada */
+    color:#000;
     border: 2px solid #000; /* Borde más oscuro */
     transition: background-color 0.5s; /* Transición para el encendido */
 }
@@ -33,9 +34,9 @@ main > section div {
 /* Animaciones de encendido */
 /* Especificidad (022) */
 main.load div:nth-of-type(1) {
-    background-color: red;
     animation: light-up 0.5s forwards;
 }
+/*El color rojo se va alternando en cada luz cuando main tiene la clase load*/
 /* Especificidad (022) */
 main.load div:nth-of-type(2) {
     animation: light-up 0.5s 0.5s forwards;
@@ -56,12 +57,14 @@ main.load div:nth-of-type(4) {
 }
 
 /* Animaciones de apagado */
+/*El color de primer plano lo hereda de div*/
 /* Especificidad (012) */
 main.unload div {
     background-color: #0007; /* Todas las luces se apagan */
-    animation: light-off 0.1s forwards;
+    animation: light-off 0.5s forwards;
 }
-
+/*El color de primer plano lo hereda de div*/
+/*Cuando se apagan las luces el color se cambia a negro*/
 @keyframes light-off {
     to {
         background-color: #0007;

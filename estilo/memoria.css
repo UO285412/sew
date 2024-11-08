@@ -1,28 +1,23 @@
-/* Estilos generales */
-/*Especificidad (0,0,1)*/
-/*Color de primer plano es el de las cartas*/
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+/* Especificidad (0,0,2) */
+main > section {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto auto auto;
+    gap: 1rem;
+    justify-items: center;
     align-items: center;
-    min-height: 100vh;
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
 }
 
-/* Contenedor principal */
-/*Especificidad (0,0,1)*/
-main {
+/* Especificidad (0,0,3) */
+main > section h2 {
+    grid-column: span 4;
     text-align: center;
 }
 
-/* Título */
-/*Especificidad (0,0,1)*/
-h1 {
-    font-size: 2rem;
-    margin-bottom: 2rem;
+/* Especificidad (0,0,3) */
+main > section > button {
+    grid-column: span 2;
+    padding: 0.5rem 1rem;
 }
 
 /* Sección de cartas */
@@ -49,7 +44,7 @@ section > article {
     transition: transform 0.5s;
     cursor: pointer;
     backface-visibility: hidden;
-    
+    color: #f0f0f0;
 }
 
 /* Frente y reverso de la carta */

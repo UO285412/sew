@@ -1,35 +1,35 @@
 /* Nestor Fernandez Garcia UO285412 */
-/* Especificidad: 001 */
+/* Especificidad: (0,0,1) */
 body {
   font-family: "Arial Black", sans-serif;
   color: #010100;
   background-color: #A0E7E5;
 }
 
-/* Especificidad: 002 */
+/* Especificidad: (0,0,2) */
 /* Color por defecto de enlaces */
 header a {
   text-decoration-line: none;
 }
 
-/* Especificidad: 001 */
+/* Especificidad: (0,0,1) */
 video {
   width: 100%;
   height: auto;
 }
 
-/* Especificidad: 001 */
+/* Especificidad: (0,0,1) */
 nav {
   color: #010100;    
   background-color: #FFFFFF;  
 }
 
-/* Especificidad: 002 */
+/* Especificidad: (0,0,2) */
 body > p {
   font-size: 0.8rem;
 }
 
-/* Especificidad: 001 */
+/* Especificidad: (0,0,1) */
 table {
   width: 100%; /* Asegura que la tabla ocupe el 100% del ancho disponible */
   border-collapse: collapse; /* Elimina los espacios entre las celdas */

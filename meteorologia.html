@@ -1,43 +1,60 @@
 <!DOCTYPE HTML>
-
 <html lang="es">
 <head>
     <!-- Datos que describen el documento -->
     <meta charset="UTF-8" />
-	<meta name ="author" content ="Nestor Fernandez Garcia" />
-	<meta name ="description" content ="Meteorologia F1" />
-	<meta name ="keywords" content ="meteorologia" />
-	<meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
+    <meta name ="author" content ="Nestor Fernandez Garcia" />
+    <meta name ="description" content ="Meteorologia F1" />
+    <meta name ="keywords" content ="meteorologia" />
+    <meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
     <title>Meteorologia</title>
     <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
-	<link rel="stylesheet" type="text/css" href="estilo/layout.css" />
-</head>
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+    <link rel="stylesheet" type="text/css" href="estilo/article_elements.css">
 
+    <!-- Añadir la referencia a jQuery aquí -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Añadir la referencia a pais.js después de jQuery -->
+    <script src="js/pais.js"></script>
+</head>
 <body>
 
-	<header>
-    <h1><a href="index.html"> F1 DESKTOP</a></h1>
-	<nav>
-		<a title="Enlace a Inicio" href="index.html"> Inicio</a>
-		<a title="Enlace a piloto" href="piloto.html">Piloto</a>
-		<a title="Enlace a noticias" href="noticias.html">Noticias</a>
-		<a title ="Enlace a calendario" href="calendario.html">Calendario</a>
-		<a title="Enlace a viajes" href="viajes.html">Viajes</a>
-		<a title="Enlace a juegos" href="juegos.html">Juegos</a>
-		<a title="Enlace a circuito" href="circuito.html">Circuito</a>
-		<a href="meteorologia.html" class="active">Meteorologia</a>
-	</nav>
-	</header>
+    <header>
+        <h1><a href="index.html"> F1 DESKTOP</a></h1>
+        <nav>
+            <a title="Enlace a Inicio" href="index.html"> Inicio</a>
+            <a title="Enlace a piloto" href="piloto.html">Piloto</a>
+            <a title="Enlace a noticias" href="noticias.html">Noticias</a>
+            <a title ="Enlace a calendario" href="calendario.html">Calendario</a>
+            <a title="Enlace a viajes" href="viajes.html">Viajes</a>
+            <a title="Enlace a juegos" href="juegos.html">Juegos</a>
+            <a title="Enlace a circuito" href="circuito.html">Circuito</a>
+            <a href="meteorologia.html" class="active">Meteorologia</a>
+        </nav>
+    </header>
 
-<p> Estás en: Inicio | Meteorologia</p>
-<main>
-	<h2>Tiempo el dia de la carrera</h2>	
-	<script src="js/pais.js"></script>
-    <!-- Datos con el contenidos que aparece en el navegador -->
-    <p>Seccion de meteorologia </p>
-	<p>En desarrollo </p>
-</main>
+    <p> Estás en: Inicio | Meteorologia</p>
 
-	
+    <main>
+        <h2>Tiempo el día de la carrera</h2>
+
+        <!-- Datos con el contenido que aparece en el navegador -->
+        <p>Sección de meteorología</p>
+        <p>En desarrollo</p>
+    </main>
+
+    <script>
+        $(document).ready(function() {
+            const pais = new Pais(
+                'China',
+                'Shanghai',
+                'Circuito de Shanghai',
+                31.337239,    
+                121.220292   
+            );
+            pais.obtenerPrevisionTiempo();
+        });
+    </script>
+
 </body>
 </html>
