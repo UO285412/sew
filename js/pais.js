@@ -24,6 +24,7 @@ class Pais {
     }
 
     procesarPrevisionTiempo(xmlData) {
+        console.log(xmlData);
         const $xml = $(xmlData);
         const $prevision = $('main').first();
 
@@ -52,9 +53,9 @@ class Pais {
                 const iconUrl = `https://openweathermap.org/img/wn/${simboloClima}@2x.png`;
 
                 // Cantidad de lluvia
-                let lluvia = $this.find('precipitation').attr('value');
+                let lluvia = $this.find('precipitation').attr('quantity');
                 if (!lluvia) {
-                    lluvia = '0';
+                    lluvia = 'No disponible';
                 }
 
               
@@ -65,7 +66,7 @@ class Pais {
                 const $tempMax = $('<p></p>').text(`Temperatura Máxima: ${tempMax} °C`);
                 const $tempMin = $('<p></p>').text(`Temperatura Mínima: ${tempMin} °C`);
                 const $humedad = $('<p></p>').text(`Humedad: ${humedad}%`);
-                const $lluvia = $('<p></p>').text(`Lluvia: ${lluvia} mm`);
+                const $lluvia = $('<p></p>').text(`Lluvia: ${lluvia}`);
 
                 
                 $article.append($fecha, $icono, $tempMax, $tempMin, $humedad, $lluvia);

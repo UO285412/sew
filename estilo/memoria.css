@@ -6,6 +6,7 @@ main > section {
     gap: 1rem;
     justify-items: center;
     align-items: center;
+    justify-content: center;
 }
 
 /* Especificidad (0,0,3) */
@@ -20,14 +21,7 @@ main > section > button {
     padding: 0.5rem 1rem;
 }
 
-/* Sección de cartas */
-/*Especificidad (0,0,1)*/
-section {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Cuatro columnas */
-    gap: 1rem; /* Espacio entre cartas */
-    justify-content: center;
-}
+
 
 /* Estilo de cada carta */
 /*Especificidad (0,0,2)*/

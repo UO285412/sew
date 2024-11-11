@@ -22,7 +22,7 @@ class Agenda {
         const races = data.MRData.RaceTable.Races;
         const $contenedor = $('main > section').first();
 
-        // Limpiar contenido previo
+        // Limpiamos el contenido que pueda haber
         $contenedor.empty();
 
         races.forEach((race) => {
@@ -33,17 +33,17 @@ class Agenda {
             const fecha = race.date;
             const hora = race.time || 'No especificada';
 
-            // Crear elementos HTML
+            // Creamos elementos HTML
             const $article = $('<article></article>');
             const $nombreCarrera = $('<h2></h2>').text(nombreCarrera);
             const $nombreCircuito = $('<p></p>').text(`Circuito: ${nombreCircuito}`);
             const $coordenadas = $('<p></p>').text(`Coordenadas: ${latitud}, ${longitud}`);
             const $fechaHora = $('<p></p>').text(`Fecha y hora: ${fecha} ${hora}`);
 
-            // Añadir elementos al artículo
+            // Añadimos los elementos al artículo
             $article.append($nombreCarrera, $nombreCircuito, $coordenadas, $fechaHora);
 
-            // Añadir artículo al contenedor
+            // Añadimos el artículo al contenedor
             $contenedor.append($article);
         });
     }
