@@ -1,10 +1,10 @@
 /* Especificidad (0,0,2) */
 main > section {
     display: grid;
-    grid-template-columns: repeat(4, 6em);
-    grid-template-rows: auto auto auto auto;
-    gap: 1rem;
+    grid-template-columns: repeat(4, 20%);
+    grid-template-rows:auto auto auto auto;
     justify-items: center;
+    gap:2% 2%;
     align-items: center;
     justify-content: center;
 
@@ -29,7 +29,7 @@ main > section > button {
 section > article {
     background-color:#002142; /* Color de fondo de la carta */
     width: 100%; /* Ancho de la carta relativo */
-    aspect-ratio: 5 / 7; /* Relación de aspecto para mantener la forma */
+    aspect-ratio: 2/1; /* Relación de aspecto para mantener la forma */
     border-radius: 0.5rem; /* Bordes redondeados */
     display: flex;
     justify-content: center;
