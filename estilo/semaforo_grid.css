@@ -65,6 +65,7 @@ main.unload div {
 }
 /*El color de primer plano lo hereda de div*/
 /*Cuando se apagan las luces el color se cambia a negro*/
+/*Redefinicion de background color*/
 @keyframes light-off {
     to {
         background-color: #0007;

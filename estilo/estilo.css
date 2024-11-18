@@ -117,3 +117,9 @@ nav a:focus {
     display: none; /* Ocultar migas de navegación en pantallas pequeñas */
   }
 }
+  main >  div {
+    width: 100%;
+    height: 57vmin;
+}
+
+

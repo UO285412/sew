@@ -26,7 +26,7 @@ main > section > button {
 /* Estilo de cada carta */
 /*Especificidad (0,0,2)*/
 section > article {
-    background-color: #0066cc; /* Color de fondo de la carta */
+    background-color:#002142; /* Color de fondo de la carta */
     width: 100%; /* Ancho de la carta relativo */
     aspect-ratio: 5 / 7; /* Relación de aspecto para mantener la forma */
     border-radius: 0.5rem; /* Bordes redondeados */

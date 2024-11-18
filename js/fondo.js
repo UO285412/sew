@@ -16,7 +16,7 @@ class Fondo {
             }
         ).done(function(data) {
             $.each(data.items, function(i, item) {
-                $("<img />").attr("src", item.media.m)
+                $("<img />").attr("src", item.media.m.replace("_m","_b")).attr("alt","Fondo pantalla")
                     .attr("alt", "Imagen fondo pantalla")
                     .css({
                         "width": "100%",

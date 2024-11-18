@@ -1,56 +1,36 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Noticias F1</title>
-    <link rel="stylesheet" href="estilos/noticias.css">
-</head>
-<body>
-    <header>
-        <h1>Noticias de Fórmula 1</h1>
-    </header>
-
-    <main>
-        <!-- Bloque de carga de archivo -->
-        <section>
-            <h2>Cargar archivo de noticias</h2>
-            <input type="file" aria-label="Cargar archivo de noticias" onchange="noticias.readInputFile(event)">
-            
-            <p>Nombre del archivo:</p>
-            <p>Tamaño del archivo:</p>
-            <p>Tipo del archivo:</p>
-            <p>Fecha de la última modificación:</p>
-            
-            <h3>Contenido del archivo de texto:</h3>
-            <article role="region" aria-label="Contenido del archivo"></article>
-            
-            <p>Error en la lectura del archivo:</p>
-        </section>
-
-        <!-- Bloque para agregar nueva noticia -->
-        <section>
-            <h2>Añadir una nueva noticia</h2>
-            <form aria-label="Formulario de noticias">
-                <label>Título de la noticia:</label>
-                <input type="text" placeholder="Título">
-                
-                <label>Entradilla de la noticia:</label>
-                <textarea placeholder="Entradilla"></textarea>
-                
-                <label>Autor de la noticia:</label>
-                <input type="text" placeholder="Autor">
-                
-                <button type="button" onclick="noticias.addNewNoticia()">Añadir noticia</button>
-            </form>
-
-            <article>
-                <h3>Noticias cargadas</h3>
-                <!-- Noticias cargadas o agregadas dinámicamente se mostrarán aquí -->
-            </article>
-        </section>
-    </main>
+    <!-- Datos que describen el documento -->
+    <meta charset="UTF-8" />
+    <meta name ="author" content ="Nestor Fernandez Garcia" />
+    <meta name ="description" content ="Noticias F1" />
+    <meta name ="keywords" content ="noticias" />
+    <meta name ="viewport" content ="width=device-width, initial-scale=1.0" />
+    <title>Noticias</title>
+    <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
+    <link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+    <link rel="stylesheet" type="text/css" href="estilo/article_elements.css">
+    <link rel="icon"  href="multimedia/imagenes/favicon.ico" />
 
     <script src="js/noticias.js"></script>
+</head>
+<body>
+
+    <header>
+        <h1><a href="index.html"> F1 DESKTOP</a></h1>
+        <nav>
+            <a title="Enlace a Inicio" href="index.html"> Inicio</a>
+            <a title="Enlace a piloto" href="piloto.html">Piloto</a>
+            <a href="noticias.html" class="active">Noticias</a>
+            <a title ="Enlace a calendario" href="calendario.html">Calendario</a>
+            <a title="Enlace a viajes" href="viajes.html">Viajes</a>
+            <a title="Enlace a juegos" href="juegos.html">Juegos</a>
+            <a title="Enlace a circuito" href="circuito.html">Circuito</a>
+            <a title="Enlace a meteorologia" href="meteorologia.html">Meteorologia</a>
+        </nav>
+    </header>
+
+    <main></main>
 </body>
 </html>
