@@ -1,12 +1,13 @@
 /* Especificidad (0,0,2) */
 main > section {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 6em);
     grid-template-rows: auto auto auto auto;
     gap: 1rem;
     justify-items: center;
     align-items: center;
     justify-content: center;
+
 }
 
 /* Especificidad (0,0,3) */
