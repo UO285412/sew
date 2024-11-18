@@ -5,6 +5,7 @@ class Viajes {
         this.errorMessage = null;
 
         this.initGeolocation();
+        this.initButton();
     }
 
     initGeolocation() {
@@ -20,12 +21,15 @@ class Viajes {
         }
     }
 
+    initButton() {
+        const button = document.querySelector("main > button");
+        button.addEventListener("click", () => this.displayMaps());
+    }
+
     storePosition(position) {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.displayPosition();
-        this.displayStaticMap();
-        this.displayDynamicMap();
     }
 
     handleError(error) {
@@ -47,7 +51,7 @@ class Viajes {
     }
 
     displayPosition() {
-        const locationArticle = document.querySelector("main >  article:nth-of-type(1)");
+        const locationArticle = document.querySelector("main > article:nth-of-type(1)");
         locationArticle.innerHTML = `
             <p>Latitud: ${this.latitude}</p>
             <p>Longitud: ${this.longitude}</p>
@@ -81,10 +85,20 @@ class Viajes {
             zoom: 14
         });
 
-        new mapboxgl.Marker({color:'red'})
+        new mapboxgl.Marker({ color: 'red' })
             .setLngLat([this.longitude, this.latitude])
             .addTo(map);
-            map.resize();
+
+        map.resize();
+    }
+
+    displayMaps() {
+        if (this.latitude && this.longitude) {
+            this.displayStaticMap();
+            this.displayDynamicMap();
+        } else {
+            this.displayError();
+        }
     }
 }
 
