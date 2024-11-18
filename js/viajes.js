@@ -47,7 +47,7 @@ class Viajes {
     }
 
     displayPosition() {
-        const locationArticle = document.querySelector("main > section > article:nth-of-type(1)");
+        const locationArticle = document.querySelector("main >  article:nth-of-type(1)");
         locationArticle.innerHTML = `
             <p>Latitud: ${this.latitude}</p>
             <p>Longitud: ${this.longitude}</p>
@@ -62,7 +62,7 @@ class Viajes {
     }
 
     displayStaticMap() {
-        const mapArticle = document.querySelector("main > section > article:nth-of-type(2)");
+        const mapArticle = document.querySelector("main > article:nth-of-type(2)");
 
         const mapUrl = `https://api.mapbox.com/styles/v1/mapbox/streets-v12/static/pin-s+fb0e55(${this.longitude},${this.latitude})/${this.longitude},${this.latitude},16,0/400x500?access_token=pk.eyJ1IjoibmVzdG9yMjU0MCIsImEiOiJjbTNmMDhzNWQwanppMmxzYWR4NGhxdTg5In0.3yLmtGrb9H9BRfeqAq0rsQ`;
 
@@ -70,7 +70,7 @@ class Viajes {
     }
 
     displayDynamicMap() {
-        const mapContainer = document.querySelector("main > section > div");
+        const mapContainer = document.querySelector("main > div");
 
         mapboxgl.accessToken = "pk.eyJ1IjoibmVzdG9yMjU0MCIsImEiOiJjbTNmMDhzNWQwanppMmxzYWR4NGhxdTg5In0.3yLmtGrb9H9BRfeqAq0rsQ";
 
