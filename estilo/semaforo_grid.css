@@ -27,7 +27,7 @@ main > section div {
     border-radius: 50%; /* Círculo perfecto */
     background-color: #0007; /* Color de la luz apagada */
     color:#000;
-    border: 2px solid #000; /* Borde más oscuro */
+    border: 0.4rem solid #000; /* Borde más oscuro */
     transition: background-color 0.5s; /* Transición para el encendido */
 }
 

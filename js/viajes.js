@@ -81,7 +81,7 @@ class Viajes {
         const map = new mapboxgl.Map({
             container: mapContainer,
             style: 'mapbox://styles/mapbox/streets-v12',
-            center: [this.longitude, this.latitude],
+            attributionControl:false,
             zoom: 14
         });
 

@@ -5,7 +5,9 @@ class Noticias {
             alert("Lo siento, tu navegador no soporta la API File necesaria para este ejercicio.");
             return; // Salir del constructor si no hay soporte
         }
-        // Crear y añadir input para carga de archivo
+      
+
+          // Crear y añadir input para carga de archivo
         const main = document.querySelector("main");
         const seccionCarga = document.createElement("section");
         
@@ -20,9 +22,15 @@ class Noticias {
         seccionCarga.appendChild(tituloCarga);
         seccionCarga.appendChild(fileInput);
         main.appendChild(seccionCarga);
-
-        // Crear sección para mostrar información de archivo y contenido
+         // Crear sección para mostrar información de archivo y contenido
         this.createDisplaySection();
+        const sections = document.querySelectorAll("main > section");
+        this.newsContainer = sections[0].querySelector("article");
+        this.addNewsForm = sections[1].querySelector("form");
+        this.addNewsButton = this.addNewsForm.querySelector("button");
+
+        // Configura el evento para el botón
+        this.addNewsButton.addEventListener("click", () => this.addNews());
     }
 
     createDisplaySection() {
@@ -55,25 +63,43 @@ class Noticias {
         this.errorArchivo.style.color = "red"; // Mensaje de error en rojo
         
         seccionContenido.append(this.areaVisualizacion, this.errorArchivo);
-        main.appendChild(seccionContenido);
+     
     }
 
     readInputFile(event) {
         const archivo = event.target.files[0];
         if (!archivo) return;
-
+    
         this.nombreArchivo.innerText = `Nombre del archivo: ${archivo.name}`;
         this.tamañoArchivo.innerText = `Tamaño del archivo: ${archivo.size} bytes`;
         this.tipoArchivo.innerText = `Tipo del archivo: ${archivo.type}`;
         this.ultimaModificacion.innerText = `Fecha de la última modificación: ${archivo.lastModifiedDate}`;
-
+    
         const tipoTexto = /text.*/;
-
+    
         if (archivo.type.match(tipoTexto)) {
             const lector = new FileReader();
             lector.onload = (evento) => {
-                this.areaVisualizacion.innerText = evento.target.result;
+                const contenido = evento.target.result;
                 this.errorArchivo.innerText = ""; // Limpia cualquier error anterior
+                this.areaVisualizacion.innerText = contenido;
+    
+                // Procesar las noticias del archivo
+                const lineas = contenido.split("\n");
+                lineas.forEach((linea) => {
+                    const [titulo, contenido, autor] = linea.split("_");
+                    if (titulo && contenido && autor) {
+                        const article = document.createElement("article");
+                        article.innerHTML = `
+                            <h4>${titulo.trim()}</h4>
+                            <p>${contenido.trim()}</p>
+                            <footer><strong>Autor:</strong> ${autor.trim()}</footer>
+                        `;
+    
+                        // Insertar las noticias del archivo al inicio
+                        this.newsContainer.insertBefore(article, this.newsContainer.firstChild);
+                    }
+                });
             };
             lector.readAsText(archivo);
         } else {
@@ -81,9 +107,45 @@ class Noticias {
             this.areaVisualizacion.innerText = "";
         }
     }
+    
+
+
+// Método para añadir una nueva noticia
+addNews() {
+    // Obtén los valores de los inputs
+    const titleInput = this.addNewsForm.querySelector("input[name='titulo']");
+    const contentInput = this.addNewsForm.querySelector("textarea[name='contenido']");
+    const authorInput = this.addNewsForm.querySelector("input[name='autor']");
+
+    const title = titleInput.value.trim();
+    const content = contentInput.value.trim();
+    const author = authorInput.value.trim();
+
+    // Validar que no estén vacíos
+    if (!title || !content || !author) {
+        alert("Todos los campos son obligatorios.");
+        return;
+    }
+
+    // Crear un nuevo artículo
+    const newArticle = document.createElement("article");
+    newArticle.innerHTML = `
+        <h4>${title}</h4>
+        <p>${content}</p>
+        <footer><strong>Autor:</strong> ${author}</footer>
+    `;
+
+    // Añadirlo al contenedor de noticias
+    this.newsContainer.appendChild(newArticle);
+
+    // Limpia los campos del formulario
+    titleInput.value = "";
+    contentInput.value = "";
+    authorInput.value = "";
+}
 }
 
-// Instancia de la clase Noticias
+// Inicializa la clase Noticias cuando el DOM esté cargado
 document.addEventListener("DOMContentLoaded", () => {
-    new Noticias();
+new Noticias();
 });

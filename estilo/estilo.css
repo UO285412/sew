@@ -128,5 +128,13 @@ main > div {
 main > h3 {
   margin-bottom: 0.5rem;
 }
-
-
+ /* Ajusta el tamaño del contenedor del mapa dinámico de circuito */
+ main > section > label {
+  width: 100%;
+  height: 60vh; /* Ajuste para pantallas pequeñas */
+  margin-top: 1rem; /* Espacio adicional */
+}
+main > section:nth-of-type(2) div {
+  width: 100%;
+  height: 60vh;
+}
