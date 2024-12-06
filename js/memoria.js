@@ -46,12 +46,15 @@ class Memoria {
         document.querySelectorAll("section article").forEach(card => {
             card.addEventListener("click", () => this.flipCard(card));
         });
+
+        const resetButton = document.querySelector("button[aria-label='Reiniciar juego']");
+        resetButton.addEventListener("click", () => this.resetGame());
     }
 
     flipCard(card) {
         if (this.lockBoard || card === this.firstCard || card.getAttribute("data-state") === "revealed") return;
 
-        card.style.transform = "rotateY(180deg)";
+        card.setAttribute("data-flipped", "true");
 
         if (!this.hasFlippedCard) {
             this.hasFlippedCard = true;
@@ -77,8 +80,8 @@ class Memoria {
     unflipCards() {
         this.lockBoard = true;
         setTimeout(() => {
-            this.firstCard.style.transform = "rotateY(0)";
-            this.secondCard.style.transform = "rotateY(0)";
+            this.firstCard.removeAttribute("data-flipped");
+            this.secondCard.removeAttribute("data-flipped");
             this.resetBoard();
         }, 1000);
     }
@@ -87,11 +90,24 @@ class Memoria {
         [this.hasFlippedCard, this.lockBoard] = [false, false];
         [this.firstCard, this.secondCard] = [null, null];
     }
+
+    resetGame() {
+        this.hasFlippedCard = false;
+        this.lockBoard = false;
+        this.firstCard = null;
+        this.secondCard = null;
+
+        this.shuffleElements();
+
+        const cards = document.querySelectorAll("section article");
+        cards.forEach(card => {
+            card.removeAttribute("data-flipped");
+            card.removeAttribute("data-state");
+        });
+
+        this.createElements();
+        this.addEventListeners();
+    }
 }
 
 window.addEventListener("DOMContentLoaded", () => new Memoria());
-document.querySelectorAll('section > article').forEach(card => {
-    card.addEventListener('click', () => {
-        card.classList.toggle('flip');
-    });
-});

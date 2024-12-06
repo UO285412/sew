@@ -1,24 +1,88 @@
 class Pais {
-    constructor(nombrePais, nombreCapital, cantidadPoblacion, apiKey) {
+    nombrePais;
+    nombreCapital;
+    cantidadPoblacion;
+    nombreCircuito;
+    tipoGobierno;
+    coordenadasMetaLatitud;
+    coordenadasMetaLongitud;
+    religionMayoritaria;
+
+    constructor(nombrePais, nombreCapital, cantidadPoblacion) {
         this.nombrePais = nombrePais;
         this.nombreCapital = nombreCapital;
         this.cantidadPoblacion = cantidadPoblacion;
-        this.apiKey = apiKey;
+    }
+   
+    rellenarInformacionRestante()
+    {
+        this.nombreCircuito = "Shanghai";
+        this.tipoGobierno = "Gobierno popular estatal";
+        this.coordenadasMetaLatitud = "31.337238171688075"
+        this.coordenadasMetaLongitud = "121.22028643578226";
+        this.religionMayoritaria ="Budismo";
     }
 
+    getNombrePais()
+    {
+        return ""+this.nombrePais;
+    }
+
+    getNombreCapital()
+    {
+        return ""+this.nombreCapital;
+    }
+
+    getInformacionSecundaria()
+    {
+        
+        return ""+
+        "<ul>"+
+            "<li>"+
+                "<h4>Nombre del circuito:</h4>"+
+                "<p>"+this.nombreCircuito+"</p>"+
+            "</li>"+
+            "<li>"+
+                "<h4>Cantidad de poblacion:</h4>"+
+                "<p>"+this.cantidadPoblacion+"</p>"+
+            "</li>"+
+            "<li>"+
+                "<h4>Forma de gobierno:</h4>"+
+                "<p>"+this.tipoGobierno+"</p>"+
+            "</li>"+
+            "<li>"+
+                "<h4>Religión mayoritaria:</h4>"+
+                "<p>"+this.religionMayoritaria+"</p>"+
+            "</li>"+
+        "</ul>";
+    }
+
+    escribeCoordenadas()
+    {
+        document.write(
+            "<p>Latitud: "+this.coordenadasLineaMetaLatitud+"</p>"+
+            "<p>Longitud: "+this.coordenadasLineaMetaLongitud+"</p>"
+        );
+    }
     obtenerPrevisionTiempo() {
-        // URL de la API sin coordenadas, usando solo el nombre de la ciudad (Shanghai)
-        const url = `https://api.openweathermap.org/data/2.5/forecast?q=Shanghai&lang=es&units=metric&mode=xml&appid=${this.apiKey}`;
+        const meteorologia = {
+            apiKey: "d2b34fee546c2de560551f6b17f107ce",
+            lat: 31.33721258891535,
+            lon: 121.22029650718295,
+            url: "https://api.openweathermap.org/data/2.5/forecast?" +
+                 "lat=31.33721258891535&lon=121.22029650718295&" +
+                 "mode=xml&lang=es&units=metric&appid=d2b34fee546c2de560551f6b17f107ce"
+        };
 
         $.ajax({
-            url: url,
+            url: meteorologia.url,
             method: 'GET',
             dataType: 'xml',
             success: (data) => {
                 this.procesarPrevisionTiempo(data);
             },
-            error: () => {
-                console.log('Error al obtener la previsión del tiempo.');
+            error: (jqXHR, textStatus, errorThrown) => {
+                console.error(`Error al obtener la previsión del tiempo: ${textStatus}, ${errorThrown}`);
             }
         });
     }
@@ -31,53 +95,36 @@ class Pais {
         // Limpiar contenido previo
         $prevision.empty();
 
-     
-        const pronosticos = $xml.find('time[from$="12:00:00"]'); // Selecciona pronósticos del mediodía
+        const pronosticos = $xml.find('time[from$="12:00:00"]'); // Pronósticos del mediodía
 
         pronosticos.each(function(index) {
-            if (index < 5) { // Solo los próximos 5 días
+            if (index < 5) { // Próximos 5 días
                 const $this = $(this);
 
-                // Fecha del pronóstico
                 const fecha = $this.attr('from').split('T')[0];
-
-                // Temperaturas
                 const tempMax = $this.find('temperature').attr('max');
                 const tempMin = $this.find('temperature').attr('min');
-
-                // Humedad
                 const humedad = $this.find('humidity').attr('value');
-
-                // Icono del tiempo
                 const simboloClima = $this.find('symbol').attr('var');
                 const iconUrl = `https://openweathermap.org/img/wn/${simboloClima}@2x.png`;
+                const lluvia = $this.find('precipitation').attr('value') || 'No disponible';
 
-                // Cantidad de lluvia
-                let lluvia = $this.find('precipitation').attr('quantity');
-                if (!lluvia) {
-                    lluvia = 'No disponible';
-                }
-
-              
                 const $article = $('<article></article>');
-                const $fecha = $('<h2></h2>').text(fecha);
-                const $icono = $('<img>').attr('src', iconUrl).attr('alt', 'Icono del clima');
+                $article.append(
+                    `<h2>${fecha}</h2>`,
+                    `<img src="${iconUrl}" alt="Icono del clima">`,
+                    `<p>Temperatura Máxima: ${tempMax} °C</p>`,
+                    `<p>Temperatura Mínima: ${tempMin} °C</p>`,
+                    `<p>Humedad: ${humedad}%</p>`,
+                    `<p>Lluvia: ${lluvia}</p>`
+                );
 
-                const $tempMax = $('<p></p>').text(`Temperatura Máxima: ${tempMax} °C`);
-                const $tempMin = $('<p></p>').text(`Temperatura Mínima: ${tempMin} °C`);
-                const $humedad = $('<p></p>').text(`Humedad: ${humedad}%`);
-                const $lluvia = $('<p></p>').text(`Lluvia: ${lluvia}`);
-
-                
-                $article.append($fecha, $icono, $tempMax, $tempMin, $humedad, $lluvia);
-
-                
                 $prevision.append($article);
             }
         });
     }
 }
 
-// Crear una instancia de la clase Pais y obtener la previsión del tiempo para Shanghai
-const pais = new Pais("China", "Shanghai", "1.409.000.000", 'd2b34fee546c2de560551f6b17f107ce');
+// Crear una instancia de la clase y obtener la previsión del tiempo
+const pais = new Pais("China", "Shanghai", "1.409.000.000");
 pais.obtenerPrevisionTiempo();

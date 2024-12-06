@@ -50,7 +50,7 @@ main > section:last-child a {
 }
 
 /* Especificidad: (0, 2, 3) */
-/* El color de primer plano es el que hereda de main >section:last-child a */
+/* El color de primer plano es el que hereda de main > section:last-child a */
 main > section:last-child a:hover {
   background: #ffff00;
 }
@@ -117,7 +117,8 @@ nav a:focus {
     display: none; /* Ocultar migas de navegación en pantallas pequeñas */
   }
 }
- /* Ajusta el tamaño del contenedor del mapa dinámico */
+
+/* Ajusta el tamaño del contenedor del mapa dinámico */
 main > div {
   width: 100%;
   height: 60vh; /* Ajuste para pantallas pequeñas */
@@ -128,13 +129,35 @@ main > div {
 main > h3 {
   margin-bottom: 0.5rem;
 }
- /* Ajusta el tamaño del contenedor del mapa dinámico de circuito */
- main > section > label {
+
+/* Ajusta el tamaño del contenedor del mapa dinámico de circuito */
+main > section > label {
   width: 100%;
   height: 60vh; /* Ajuste para pantallas pequeñas */
-  margin-top: 1rem; /* Espacio adicional */
 }
+
 main > section:nth-of-type(2) div {
-  width: 100%;
+  width: 100vw;
+  height: 60vh;
+  
+ 
+}
+
+/* Ajusta el tamaño de los elementos SVG en la sección correspondiente */
+section > div > svg {
+  width: 100vw;
   height: 60vh;
 }
+header > button {
+  position: absolute; /* Posición absoluta respecto al contenedor */
+  top: 1rem; /* Separación desde la parte superior */
+  right: 1rem; /* Separación desde la parte derecha */
+  padding: 0.5rem 1rem; /* Espaciado interno */
+  background-color: #A11B7E; /* Color de fondo */
+  color: #FFFFFF; /* Color del texto */
+  border: none; /* Sin borde */
+  border-radius: 0.25rem; /* Bordes redondeados */
+  font-size: 1rem; /* Tamaño del texto */
+  cursor: pointer; /* Cambiar el cursor a puntero */
+}
+

@@ -1,5 +1,3 @@
-// Archivo: semaforo.js
-
 class Semaforo {
     constructor() {
         this.levels = [0.2, 0.5, 0.8]; // Dificultades del juego
@@ -72,27 +70,118 @@ class Semaforo {
     }
 
     stopReaction() {
-        this.click_moment = new Date(); // Marca el momento del clic del usuario
-        const reactionTime = ((this.click_moment - this.unload_moment) / 1000).toFixed(3); // Tiempo de reacción en segundos
+        this.clic_moment = new Date();
+        const reactionTime = ((this.clic_moment - this.unload_moment) / 1000).toFixed(3);
 
         // Crear y mostrar el párrafo con el tiempo de reacción
-        const paragraph = document.createElement("p");
-        paragraph.textContent = `Tiempo de reacción: ${reactionTime} segundos`;
-        document.querySelector("section").appendChild(paragraph);
+        const p = document.createElement("p");
+        p.textContent = `Tiempo de reacción: ${reactionTime} segundos`;
+        document.querySelector("section").appendChild(p);
 
-        // Quitar las clases de encendido y apagado
         const main = document.querySelector("main");
         main.classList.remove("load");
         main.classList.remove("unload");
 
-        // Habilita el botón de arranque y deshabilita el de reacción
         this.startButton.disabled = false;
         this.reactionButton.disabled = true;
+
+        // Llamar a createRecordForm desde JS (ya que se indica uso de jQuery y está en semaforo.js)
+        // Aquí suponemos que el método se implementó en semaforo.js
+        // y que la variable `semaforo` es global y se crea más abajo.
+        this.createRecordForm(reactionTime, this.difficulty);
     }
+
+
+    createRecordForm() {
+        // Crear el formulario usando JavaScript puro
+        const form = document.createElement('form');
+        form.method = "POST";
+        form.action = "semaforo.php";
+
+        const fieldset = document.createElement('fieldset');
+        const legend = document.createElement('legend');
+        legend.textContent = "Registrar Récord";
+
+        // Nombre
+        const labelNombre = document.createElement('label');
+        labelNombre.textContent = "Nombre:";
+        const inputNombre = document.createElement('input');
+        inputNombre.type = "text";
+        inputNombre.name = "nombre";
+        inputNombre.required = true;
+        labelNombre.appendChild(document.createElement('br'));
+        labelNombre.appendChild(inputNombre);
+
+        // Apellidos
+        const labelApellidos = document.createElement('label');
+        labelApellidos.textContent = "Apellidos:";
+        const inputApellidos = document.createElement('input');
+        inputApellidos.type = "text";
+        inputApellidos.name = "apellidos";
+        inputApellidos.required = true;
+        labelApellidos.appendChild(document.createElement('br'));
+        labelApellidos.appendChild(inputApellidos);
+
+        // Nivel
+        const labelNivel = document.createElement('label');
+        labelNivel.textContent = "Nivel:";
+        const inputNivel = document.createElement('input');
+        inputNivel.type = "text";
+        inputNivel.name = "nivel";
+        inputNivel.value = this.difficulty;
+        inputNivel.readOnly = true;
+        labelNivel.appendChild(document.createElement('br'));
+        labelNivel.appendChild(inputNivel);
+
+        // Tiempo de reacción
+        const labelTiempo = document.createElement('label');
+        labelTiempo.textContent = "Tiempo de reacción (segundos):";
+        const inputTiempo = document.createElement('input');
+        inputTiempo.type = "text";
+        inputTiempo.name = "tiempo";
+        inputTiempo.value = this.reactionTime;
+        inputTiempo.readOnly = true;
+        labelTiempo.appendChild(document.createElement('br'));
+        labelTiempo.appendChild(inputTiempo);
+
+        // Botón de envío
+        const submitButton = document.createElement('button');
+        submitButton.type = "submit";
+        submitButton.textContent = "Guardar Récord";
+
+        // Añadir todos los elementos al fieldset
+        fieldset.appendChild(legend);
+        fieldset.appendChild(labelNombre);
+        fieldset.appendChild(document.createElement('br'));
+        fieldset.appendChild(labelApellidos);
+        fieldset.appendChild(document.createElement('br'));
+        fieldset.appendChild(labelNivel);
+        fieldset.appendChild(document.createElement('br'));
+        fieldset.appendChild(labelTiempo);
+        fieldset.appendChild(document.createElement('br'));
+        fieldset.appendChild(submitButton);
+
+        // Añadir fieldset al form
+        form.appendChild(fieldset);
+
+        // Añadir el formulario debajo del semáforo (en main)
+        const main = document.querySelector('main');
+        main.appendChild(form);
+    }
+
+   
 }
 
-// Instancia el semáforo
-let semaforo;
-document.addEventListener("DOMContentLoaded", () => {
-    semaforo = new Semaforo();
+// Inicialización del juego sin jQuery
+document.addEventListener('DOMContentLoaded', () => {
+    const difficulty = "Intermedio";
+    const semaforo = new Semaforo(difficulty);
+
+    // Botón para iniciar el juego
+    const startButton = document.querySelector('button[data-action="start-game"]');
+    startButton.addEventListener('click', () => semaforo.startReactionGame());
+
+    // Botón para detener el juego y calcular el tiempo
+    const stopButton = document.querySelector('button[data-action="stop-game"]');
+    stopButton.addEventListener('click', () => semaforo.stopReaction());
 });

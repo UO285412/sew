@@ -88,6 +88,12 @@ class Viajes {
         new mapboxgl.Marker({ color: 'red' })
             .setLngLat([this.longitude, this.latitude])
             .addTo(map);
+        map.on('load', () => {
+            map.flyTo({
+                center: [this.longitude, this.latitude], // Vuela hacia tu ubicación
+                zoom: 14
+                });
+            });
 
         map.resize();
     }
