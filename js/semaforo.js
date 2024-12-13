@@ -1,3 +1,5 @@
+// Archivo: semaforo.js
+
 class Semaforo {
     constructor() {
         this.levels = [0.2, 0.5, 0.8]; // Dificultades del juego
@@ -7,14 +9,14 @@ class Semaforo {
 
         // Inicializa la dificultad del juego de forma aleatoria
         this.difficulty = this.levels[Math.floor(Math.random() * this.levels.length)];
-
-        this.createStructure(); // Genera la estructura del semáforo al instanciar
+        this.createStructure();
+      
     }
 
     createStructure() {
         const main = document.querySelector("main");
         const section = document.createElement("section");
-
+        section.classList.add("semaforo-section");
         // Encabezado del juego
         const header = document.createElement("h2");
         header.textContent = "Juego de tiempo de reacción";
@@ -43,7 +45,7 @@ class Semaforo {
         section.appendChild(reactionButton);
 
         main.appendChild(section);
-
+        this.semaforoSection = section; // Guardamos la referencia a la sección
         // Guardar referencias a los botones
         this.startButton = startButton;
         this.reactionButton = reactionButton;
@@ -70,29 +72,29 @@ class Semaforo {
     }
 
     stopReaction() {
-        this.clic_moment = new Date();
-        const reactionTime = ((this.clic_moment - this.unload_moment) / 1000).toFixed(3);
-
-        // Crear y mostrar el párrafo con el tiempo de reacción
-        const p = document.createElement("p");
-        p.textContent = `Tiempo de reacción: ${reactionTime} segundos`;
-        document.querySelector("section").appendChild(p);
-
+        this.click_moment = new Date();
+        const reactionTime = ((this.click_moment - this.unload_moment) / 1000).toFixed(3);
+    
+        const paragraph = document.createElement("p");
+        paragraph.textContent = `Tiempo de reacción: ${reactionTime} segundos`;
+        this.semaforoSection.appendChild(paragraph);
+    
         const main = document.querySelector("main");
         main.classList.remove("load");
         main.classList.remove("unload");
-
+    
         this.startButton.disabled = false;
         this.reactionButton.disabled = true;
-
-        // Llamar a createRecordForm desde JS (ya que se indica uso de jQuery y está en semaforo.js)
-        // Aquí suponemos que el método se implementó en semaforo.js
-        // y que la variable `semaforo` es global y se crea más abajo.
+    
+        // Ahora creamos y añadimos el formulario desde aquí
         this.createRecordForm(reactionTime, this.difficulty);
     }
+    
 
+    
 
-    createRecordForm() {
+    createRecordForm(reactionTime, difficulty) {
+        console.log("Creando formulario para registrar récord...");
         // Crear el formulario usando JavaScript puro
         const form = document.createElement('form');
         form.method = "POST";
@@ -128,7 +130,7 @@ class Semaforo {
         const inputNivel = document.createElement('input');
         inputNivel.type = "text";
         inputNivel.name = "nivel";
-        inputNivel.value = this.difficulty;
+        inputNivel.value = difficulty;
         inputNivel.readOnly = true;
         labelNivel.appendChild(document.createElement('br'));
         labelNivel.appendChild(inputNivel);
@@ -139,7 +141,7 @@ class Semaforo {
         const inputTiempo = document.createElement('input');
         inputTiempo.type = "text";
         inputTiempo.name = "tiempo";
-        inputTiempo.value = this.reactionTime;
+        inputTiempo.value = reactionTime;
         inputTiempo.readOnly = true;
         labelTiempo.appendChild(document.createElement('br'));
         labelTiempo.appendChild(inputTiempo);
@@ -166,22 +168,8 @@ class Semaforo {
 
         // Añadir el formulario debajo del semáforo (en main)
         const main = document.querySelector('main');
-        main.appendChild(form);
+        this.semaforoSection.appendChild(form);
+        console.log("Formulario de récord creado.");
     }
-
-   
 }
 
-// Inicialización del juego sin jQuery
-document.addEventListener('DOMContentLoaded', () => {
-    const difficulty = "Intermedio";
-    const semaforo = new Semaforo(difficulty);
-
-    // Botón para iniciar el juego
-    const startButton = document.querySelector('button[data-action="start-game"]');
-    startButton.addEventListener('click', () => semaforo.startReactionGame());
-
-    // Botón para detener el juego y calcular el tiempo
-    const stopButton = document.querySelector('button[data-action="stop-game"]');
-    stopButton.addEventListener('click', () => semaforo.stopReaction());
-});
