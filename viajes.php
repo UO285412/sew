@@ -2,7 +2,8 @@
 class Carrusel {
     private $capital;
     private $pais;
-    private $apiKey = "f3a69d2c5dc8783a4194ba3ffd9b167d"; // Sustituye con tu API Key de Flickr
+    protected static $numero = 10;
+    private $apiKey = "f3a69d2c5dc8783a4194ba3ffd9b167d";
     private $endpoint = "https://www.flickr.com/services/rest/";
 
     public function __construct($capital, $pais) {
@@ -10,52 +11,67 @@ class Carrusel {
         $this->pais = $pais;
     }
 
-    /**
-     * Llama a la API de Flickr para obtener fotos.
-     */
-    public function obtenerFotos() {
-        $query = "{$this->capital}, {$this->pais}";
-        $params = [
-            "method" => "flickr.photos.search",
-            "api_key" => $this->apiKey,
-            "format" => "json",
-            "nojsoncallback" => 1,
-            "per_page" => 10,
-            "text" => $query,
-            "sort" => "relevance"
-        ];
+    public function cargarFotosCarrusel() {
+        $tags = $this->capital; 
 
-        $url = $this->endpoint . "?" . http_build_query($params);
-        $response = file_get_contents($url);
-        $data = json_decode($response, true);
+        $urlFlickr = 'https://api.flickr.com/services/feeds/photos_public.gne?'
+        . 'tags=' . $this -> pais
+        . '&per_page=' . self::$numero
+        . '&format=json'
+        . '&nojsoncallback=1';
 
-        if ($data && $data['stat'] === 'ok') {
-            return $data['photos']['photo'];
+    $respuestaJson = json_decode(file_get_contents($urlFlickr));
+
+    if ($respuestaJson) {
+        for ($indice = 0; $indice < self::$numero; $indice++) {
+            $imagenHtml = "<img src=\"";
+
+            $fotoActual = $respuestaJson->items[$indice];
+            $urlImagen = $fotoActual->media->m;
+
+            $imagenHtml .= $urlImagen . "\" alt=\"Imagen " . ($indice + 1) . " del carrusel\" />";
+
+            echo $imagenHtml;
         }
-
-        return [];
+    } else {
+        echo "<p>Error al obtener las fotos para el carrusel</p>";
     }
 
-    /**
-     * Genera el HTML del carrusel de fotos.
-     */
-    public function generarCarrusel() {
-        $fotos = $this->obtenerFotos();
-        if (empty($fotos)) {
-            return "<p>No se encontraron fotos para {$this->capital}, {$this->pais}.</p>";
-        }
-
-        $carruselHtml = '<section><h3>Carrusel de Fotos</h3><div class="carrusel">';
-        foreach ($fotos as $foto) {
-            $fotoUrl = "https://live.staticflickr.com/{$foto['server']}/{$foto['id']}_{$foto['secret']}_q.jpg";
-            $carruselHtml .= "<img src='{$fotoUrl}' alt='Foto de {$this->capital}, {$this->pais}' />";
-        }
-        $carruselHtml .= '</div></section>';
-        return $carruselHtml;
-    }
 }
-?>
+}
+class Moneda {
+    private $monedaLocal;
+    private $monedaCambio;
 
+    public function __construct($monedaLocal, $monedaCambio) {
+        $this->monedaLocal = strtoupper($monedaLocal);
+        $this->monedaCambio = strtoupper($monedaCambio);
+    }
+
+    public function obtenerCambio() {
+        $url = "https://api.exchangerate-api.com/v4/latest/{$this->monedaCambio}";
+        $json = @file_get_contents($url); 
+    
+        if ($json === false) {
+            return "Error: No se pudo conectar con el servicio de cambio de moneda.";
+        }
+    
+        $datos = json_decode($json, true);
+    
+        if (!isset($datos['rates'][$this->monedaLocal])) {
+            return "No se pudo obtener el cambio para la moneda solicitada.";
+        }
+    
+        return $datos['rates'][$this->monedaLocal];
+    }
+    
+}
+
+
+
+
+
+?>
 
 <!DOCTYPE HTML>
 <html lang="es">
@@ -66,12 +82,16 @@ class Carrusel {
     <meta name="keywords" content="viajes" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Viajes</title>
-    <link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
-    <link rel="stylesheet" type="text/css" href="estilo/layout.css" /> 
-    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" />
-    <link rel="icon"  href="multimedia/imagenes/favicon.ico" />
-    <script src="js/viajes.js"></script>
-    <script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js" defer></script>
+ 
+	<link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
+	<link rel="stylesheet" type="text/css" href="estilo/layout.css" />
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" />
+	<link rel="icon" href="multimedia/imagenes/favicon.ico" />
+
+	<script src="js/viajes.js"></script>
+	<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs" crossorigin="anonymous"></script>
+	<script src="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.js"></script> 
+
 </head>
 
 <body>
@@ -82,7 +102,7 @@ class Carrusel {
             <a title="Enlace a piloto" href="piloto.html">Piloto</a>
             <a title="Enlace a noticias" href="noticias.html">Noticias</a>
             <a title="Enlace a calendario" href="calendario.html">Calendario</a>
-            <a href="viajes.html" class="active">Viajes</a>
+            <a href="viajes.php" class="active">Viajes</a>
             <a title="Enlace a juegos" href="juegos.html">Juegos</a>
             <a title="Enlace a circuito" href="circuito.html">Circuito</a>
             <a title="Enlace a meteorologia" href="meteorologia.html">Meteorologia</a>
@@ -92,17 +112,47 @@ class Carrusel {
     <p>Estás en: Inicio | Viajes</p>
 
     <main>
-        <h2>Viajes para ir a la carrera</h2>
-         <!-- Mostrar el carrusel de fotos -->
-         <?php echo generarCarrusel(); ?>
-        <button type="button" aria-label="Mostrar mapas">Mostrar Mapas</button>
-            <h3>Ubicación Actual</h3>
-            <article></article> <!-- Aquí se muestra la ubicación o el mensaje de error -->
-            <h3>Mapa Estático</h3>
-            <article></article> <!-- Aquí se muestra el mapa estático -->
-            <h3>Mapa dinámico</h3>
-            <div></div> <!-- Bloque anónimo para el mapa -->
-    </main>
+    <h2>Viajes para ir a la carrera</h2>
+    <p></p> 
+    
+    <article>
+        <h3>Carrusel</h3>
+        <?php 
+            $carrusel = new Carrusel("Shanghai","China");
+            $carrusel->cargarFotosCarrusel();
+        ?>
+        <button> &gt; </button>
+        <button> &lt; </button>
+    </article>
 
+  
+        <!-- Tipo de Cambio -->
+        <article>
+            <h3>Tipo de Cambio</h3>
+            <?php
+            $moneda = new Moneda("CNY", "EUR"); // Cambio de Euro a Yuan chino
+            $cambio = $moneda->obtenerCambio();
+            echo "<p>1 Euro equivale a <strong>$cambio CNY</strong>.</p>";
+            ?>
+        </article>
+    
+      
+        <article>
+            <h3>Mapa Estático</h3>
+            <p></p>
+            <div></div>
+        </article>
+        <article>
+            <h3>Mapa Dinámico</h3>
+            <div></div>
+        </article>
+    
+    <script>
+        var viajes = new Viajes();
+        viajes.inicializarCarrusel();
+
+    </script>
+    
+</main>
 </body>
 </html>

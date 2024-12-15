@@ -145,7 +145,3 @@ addNews() {
 }
 }
 
-// Inicializa la clase Noticias cuando el DOM esté cargado
-document.addEventListener("DOMContentLoaded", () => {
-new Noticias();
-});

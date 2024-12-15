@@ -1,3 +1,7 @@
+/* Nestor Fernandez Garcia UO285412 */
+
+"use strict";
+
 class Memoria {
     constructor() {
         this.cardsArray = [
@@ -18,13 +22,24 @@ class Memoria {
         this.addEventListeners();
     }
 
+    // Bloque estático para inicializar la clase cuando el DOM esté listo
+    static {
+        window.addEventListener("DOMContentLoaded", () => new Memoria());
+    }
+
     shuffleElements() {
         this.cardsArray.sort(() => Math.random() - 0.5);
     }
 
     createElements() {
-        const gameBoard = document.querySelector("section");
+        // Seleccionar la sección específica para el juego de memoria
+        const gameBoard = document.querySelector("main > section");
+        if (!gameBoard) {
+            console.error("Contenedor del juego de memoria no encontrado.");
+            return;
+        }
         gameBoard.innerHTML = ""; // Vaciar tablero
+
         this.cardsArray.forEach(card => {
             const cardElement = document.createElement("article");
             cardElement.setAttribute("data-element", card.element);
@@ -43,12 +58,19 @@ class Memoria {
     }
 
     addEventListeners() {
-        document.querySelectorAll("section article").forEach(card => {
+        // Seleccionar todas las tarjetas de memoria
+        const cards = document.querySelectorAll("main > section article");
+        cards.forEach(card => {
             card.addEventListener("click", () => this.flipCard(card));
         });
 
+        // Seleccionar el botón de reinicio
         const resetButton = document.querySelector("button[aria-label='Reiniciar juego']");
-        resetButton.addEventListener("click", () => this.resetGame());
+        if (resetButton) {
+            resetButton.addEventListener("click", () => this.resetGame());
+        } else {
+            console.warn("Botón de reinicio no encontrado.");
+        }
     }
 
     flipCard(card) {
@@ -99,7 +121,7 @@ class Memoria {
 
         this.shuffleElements();
 
-        const cards = document.querySelectorAll("section article");
+        const cards = document.querySelectorAll("main > section article");
         cards.forEach(card => {
             card.removeAttribute("data-flipped");
             card.removeAttribute("data-state");
@@ -109,5 +131,3 @@ class Memoria {
         this.addEventListeners();
     }
 }
-
-window.addEventListener("DOMContentLoaded", () => new Memoria());

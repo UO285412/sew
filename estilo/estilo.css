@@ -45,35 +45,35 @@ th, td {
 
 /* Especificidad: (0, 1, 3) */
 /* El color de fondo es el que hereda de body */
-main > section:last-child a {
+main > section:last-of-type a {
   color: #161a98;
 }
 
 /* Especificidad: (0, 2, 3) */
-/* El color de primer plano es el que hereda de main > section:last-child a */
-main > section:last-child a:hover {
+/* El color de primer plano es el que hereda de main > section:last-of-type a */
+main > section:last-of-type a:hover {
   background: #ffff00;
 }
 
-/* Especificidad: (0, 0, 1) */
+/* Especificidad: (0,0,1) */
 ol {
   list-style-type: upper-roman;
 }
 
-/* Especificidad: (0, 0, 1) */
+/* Especificidad: (0,0,1) */
 ul {
   padding-left: 3rem;
   list-style-type: none;
 }
 
 /* El color de fondo lo hereda de body */
-/* Especificidad: (0, 0, 1) */
+/* Especificidad: (0,0,1) */
 dd {
   color: #541006;
 }
 
 /* El color de fondo lo hereda de body */
-/* Especificidad: (0, 0, 1) */
+/* Especificidad: (0,0,1) */
 dt {
   line-height: 1.5;
   font-weight: bold;
@@ -81,20 +81,20 @@ dt {
 }
 
 /* El color de fondo lo hereda de nav */
-/* Especificidad: (0, 1, 2) */
+/* Especificidad: (0,1,2) */
 nav a.active {
   color: #A11B7E; /* Color rojo para el enlace activo */
   font-weight: bold; /* Hacer el texto en negrita */
 }
 
 /* El color de fondo lo hereda del body */
-/* Especificidad: (0, 0, 2) */
+/* Especificidad: (0,0,2) */
 nav a {
   text-decoration: none;
   color: #010100; 
 }
 
-/* Especificidad: (0, 1, 2) */
+/* Especificidad: (0,1,2) */
 /* El color de fondo lo hereda de body */
 nav a:focus {
   color: #A11B7E; /* Color destacado para el enlace activo */
@@ -103,7 +103,7 @@ nav a:focus {
 }
 
 /* Media query para pantallas pequeñas (móviles y tabletas) */
-/* Especificidad: (0, 0, 1) */
+/* Especificidad: (0,0,1) */
 @media (max-width: 465px) {
   header {
     flex-direction: column; /* Apilar h1 y nav verticalmente */
@@ -111,43 +111,99 @@ nav a:focus {
   }
 }
 
-/* Especificidad: (0, 0, 2) */
+/* Especificidad: (0,0,2) */
 @media screen and (max-width: 465px) {
   body > p {
     display: none; /* Ocultar migas de navegación en pantallas pequeñas */
   }
 }
 
-/* Ajusta el tamaño del contenedor del mapa dinámico */
-main > div {
+/* Contenedor del XML */
+/*Especificidad  (013)*/
+main > section:nth-of-type(1) > article {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 0.2rem solid purple;
+  border-radius: 0.5rem;
+  background-color: #f9f9f9;
+  font-size: 1rem;
+  color: #333;
+  white-space: pre-wrap; /* Preserva saltos de línea */
+}
+
+/* Contenedor del Mapa KML */
+/*Especificidad  (013)*/
+main > section:nth-of-type(2) > article {
+  display: flex;
   width: 100%;
-  height: 60vh; /* Ajuste para pantallas pequeñas */
-  margin-top: 1rem; /* Espacio adicional */
+  height: 60vh; /* Altura relativa al 60% de la ventana gráfica */
+  margin-top: 2rem; /* Espacio superior relativo al tamaño de la fuente raíz */
+  border: 0.2rem solid purple;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Contenedor para SVG */
+/*Especificidad  (013)*/
+main > section:nth-of-type(3) > figure {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 0.2rem solid purple;
+  border-radius: 0.5rem;
+  background-color: #f9f9f9;
+  
+  /* Utilizar Flexbox para centrar el SVG */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* Tamaño flexible */
+  width: 100%;
+  height: auto; /* Permite que la altura se ajuste según el contenido */
+}
+
+/* Estilos para el SVG dentro de <figure> */
+/*Especificidad  (014)*/
+main > section:nth-of-type(3) > figure > svg {
+  max-width: 100%; /* Asegura que el SVG no exceda el ancho del contenedor */
+  height: auto;    /* Mantiene la proporción del SVG */
+}
+/*Especificidad  (013)*/
+main > section:nth-of-type(2) > div {
+  display: none; /* Ocultar inicialmente */
+  width: 100%; /* Ocupa el 100% del ancho del contenedor padre */
+  height: 60vh; /* Altura relativa al 60% de la ventana gráfica */
+  margin-top: 2rem; /* Espacio superior relativo al tamaño de la fuente raíz */
+
 }
 
 /* Espaciado entre encabezados y contenido */
+/*Especificidad  (002)*/
 main > h3 {
   margin-bottom: 0.5rem;
 }
 
 /* Ajusta el tamaño del contenedor del mapa dinámico de circuito */
+/*Especificidad  (003)*/
 main > section > label {
   width: 100%;
   height: 60vh; /* Ajuste para pantallas pequeñas */
 }
-
-main > section:nth-of-type(2) div {
+/*Especificidad  (013)*/
+main > article:nth-of-type(4) > div {
+  display: flex;
   width: 100vw;
-  height: 60vh;
-  
- 
+  height: 57vh;
+
+}
+/*Especificidad  (014)*/
+main > article:nth-of-type(4) > div a{
+  display: none;
 }
 
-/* Ajusta el tamaño de los elementos SVG en la sección correspondiente */
-section > div > svg {
-  width: 100vw;
-  height: 60vh;
-}
+
+/*Especificidad  (002)*/
+
 header > button {
   position: absolute; /* Posición absoluta respecto al contenedor */
   top: 1rem; /* Separación desde la parte superior */
@@ -161,3 +217,73 @@ header > button {
   cursor: pointer; /* Cambiar el cursor a puntero */
 }
 
+/* Especificidad (002) */
+p + article {
+  /* Selector para el contenedor carrusel de fotos en la ventana de viajes */
+  display: grid;
+  place-items: center;
+
+  width: 100%;
+  max-width: 100vh;
+  height: 70vh;
+  
+  position: relative;
+  overflow: hidden; /* <===  */
+  border-radius: 1em;
+}
+
+/* Especificidad (003) */
+p + article h3 {
+  width: 100%;
+  margin-bottom: 0.5em;
+  position: absolute;
+  bottom: 94%;
+}
+
+/* Especificidad (003) */
+p + article img {
+  width: 100%;
+  max-width: 100vh;
+  height: 60vh;
+  position: absolute;
+  transition: all 0.5s;
+  object-fit: cover;
+  border-radius: 0.5em;
+  aspect-ratio: 16 / 9;
+}
+
+/* Especificidad (003) */
+p + article button {
+  position: absolute;
+  width: 2em;
+  height: 2em;
+  padding: 0.5em;
+  border: none;
+  border-radius: 50%;
+  z-index: 10;
+  cursor: pointer;
+  background-color: #fff;
+  /* color: #FFFFFFFF; heredado de body */
+  font-size: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content: center;
+}
+
+/* Especificidad (013) */
+p + article button:active {
+  transform: scale(1.1);
+}
+
+/* Especificidad (013) */
+p + article button:nth-of-type(2) {
+  top: 50%;
+  left: 2%;
+}
+
+/* Especificidad (013) */
+p + article button:nth-of-type(1) {
+  top: 50%;
+  right: 2%;
+}
