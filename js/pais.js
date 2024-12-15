@@ -125,3 +125,6 @@ class Pais {
     }
 }
 
+// Crear una instancia de la clase y obtener la previsión del tiempo
+const pais = new Pais("China", "Shanghai", "1.409.000.000");
+pais.obtenerPrevisionTiempo();

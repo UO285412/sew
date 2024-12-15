@@ -75,23 +75,59 @@ class Circuito {
     
 
     crearCamposXML(archivo, xmlContent) {
-        // Seleccionamos la primera sección dentro de main sin usar id ni class
-        const seccion = document.querySelector("main > section:nth-of-type(1)");
+        const seccion = document.querySelector("section:nth-of-type(1)");
     
-        // Dividimos el contenido del archivo en líneas
-        const lineas = xmlContent.split('\n');
+        // Mostrar información del archivo
+        const infoArchivo = document.createElement("div");
+        infoArchivo.innerHTML = `
+            <p>Nombre del archivo: ${archivo.name}</p>
+            <p>Tamaño del archivo: ${archivo.size} bytes</p>
+            <p>Tipo del archivo: ${archivo.type}</p>
+            <p>Fecha de la última modificación: ${archivo.lastModifiedDate}</p>
+            <p>Contenido del archivo XML:</p>
+        `;
+        seccion.appendChild(infoArchivo);
     
-        // Por cada línea, creamos un <p> y le asignamos el texto
-        lineas.forEach(linea => {
-            const p = document.createElement('p');
-            p.textContent = linea.trim();
-            seccion.appendChild(p);
-        });
+        // Mostrar contenido del XML en un elemento <pre>
+        const preElement = document.createElement("pre");
+        preElement.textContent = xmlContent;
+        seccion.appendChild(preElement);
     }
     
-    
 
-    
+    convertirXMLaHTML(xmlNode) {
+        const container = document.createElement("div");
+
+        const nodeName = document.createElement("strong");
+        nodeName.textContent = xmlNode.nodeName;
+        container.appendChild(nodeName);
+
+        // Agrega los atributos del nodo
+        if (xmlNode.attributes) {
+            const attributes = Array.from(xmlNode.attributes).map(
+                (attr) => `${attr.name}="${attr.value}"`
+            );
+            if (attributes.length > 0) {
+                const attrText = document.createElement("p");
+                attrText.textContent = `Atributos: ${attributes.join(", ")}`;
+                container.appendChild(attrText);
+            }
+        }
+
+        // Procesa los nodos hijos
+        Array.from(xmlNode.childNodes).forEach((childNode) => {
+            if (childNode.nodeType === Node.ELEMENT_NODE) {
+                const childHTML = this.convertirXMLaHTML(childNode);
+                container.appendChild(childHTML);
+            } else if (childNode.nodeType === Node.TEXT_NODE && childNode.nodeValue.trim()) {
+                const textNode = document.createElement("p");
+                textNode.textContent = `Texto: ${childNode.nodeValue.trim()}`;
+                container.appendChild(textNode);
+            }
+        });
+
+        return container;
+    }
 
   // Tarea 7: Lectura y procesamiento de archivos de planimetría
   cargarKML() {
