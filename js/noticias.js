@@ -34,37 +34,37 @@ class Noticias {
     }
 
     createDisplaySection() {
-        const main = document.querySelector("main");
-        
-        // Sección de información del archivo
-        const seccionInfo = document.createElement("section");
-        const tituloInfo = document.createElement("h2");
-   
-        seccionInfo.appendChild(tituloInfo);
+    const main = document.querySelector("main");
+    
+    // Sección de información del archivo
+    const seccionInfo = document.createElement("section");
+    const tituloInfo = document.createElement("h2");
+    tituloInfo.textContent = "Información del archivo";
+    seccionInfo.appendChild(tituloInfo);
 
-        this.nombreArchivo = document.createElement("p");
-        this.tamañoArchivo = document.createElement("p");
-        this.tipoArchivo = document.createElement("p");
-        this.ultimaModificacion = document.createElement("p");
+    this.nombreArchivo = document.createElement("p");
+    this.tamañoArchivo = document.createElement("p");
+    this.tipoArchivo = document.createElement("p");
+    this.ultimaModificacion = document.createElement("p");
 
-        seccionInfo.append(this.nombreArchivo, this.tamañoArchivo, this.tipoArchivo, this.ultimaModificacion);
-        main.appendChild(seccionInfo);
+    seccionInfo.append(this.nombreArchivo, this.tamañoArchivo, this.tipoArchivo, this.ultimaModificacion);
+    main.appendChild(seccionInfo);
 
-        // Sección de contenido del archivo
-        const seccionContenido = document.createElement("section");
-        const tituloContenido = document.createElement("h2");
-        tituloContenido.textContent = "Contenido del archivo de texto";
-        seccionContenido.appendChild(tituloContenido);
+    // Sección de contenido del archivo
+    const seccionContenido = document.createElement("section");
+    const tituloContenido = document.createElement("h2");
+    tituloContenido.textContent = "Contenido del archivo de texto";
+    seccionContenido.appendChild(tituloContenido);
 
-        this.areaVisualizacion = document.createElement("pre");
-        this.areaVisualizacion.setAttribute("aria-label", "Área de visualización del contenido");
-        
-        this.errorArchivo = document.createElement("p");
-      
-        
-        seccionContenido.append(this.areaVisualizacion, this.errorArchivo);
-     
-    }
+    this.areaVisualizacion = document.createElement("pre");
+    this.areaVisualizacion.setAttribute("aria-label", "Área de visualización del contenido");
+    
+    this.errorArchivo = document.createElement("p");
+    seccionContenido.append(this.areaVisualizacion, this.errorArchivo);
+
+    main.appendChild(seccionContenido);
+}
+
 
     readInputFile(event) {
         const archivo = event.target.files[0];
