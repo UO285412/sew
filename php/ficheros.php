@@ -338,7 +338,7 @@ if (isset($_POST['exportar'])) {
 
 ?>
 <!DOCTYPE HTML>
-<html lang="es">
+<html lang="es" xml:lang="es">
 <head>
     <!-- Metadatos -->
     <meta charset="UTF-8" />
@@ -366,7 +366,6 @@ if (isset($_POST['exportar'])) {
             <a href="../juegos.html" class="active">Juegos</a>
             <a href="../circuito.html" title="Pestaña de circuito">Circuito</a>
             <a href="../meteorologia.html" title="Pestaña de meteorologia">Meteorologia</a>
-            
         </nav>
     </header>
 
@@ -388,7 +387,8 @@ if (isset($_POST['exportar'])) {
         <section>
             <h2>Importar Pilotos desde CSV</h2>
             <form action="ficheros.php" method="POST" enctype="multipart/form-data">
-                <label>Selecciona el fichero CSV(PilotosConMasCampeonatos.csv):
+                <label>
+                    Selecciona el fichero CSV (PilotosConMasCampeonatos.csv):
                     <input type="file" name="csv_file" accept=".csv" required>
                 </label>
                 <br><br>
@@ -403,7 +403,8 @@ if (isset($_POST['exportar'])) {
         <section>
             <h2>Exportar Pilotos a CSV</h2>
             <form action="ficheros.php" method="POST">
-                <label>Selecciona la Década:
+                <label>
+                    Selecciona la Década:
                     <select name="decada_exportar" required>
                         <option value="">--Selecciona--</option>
                         <option value="50s">50s</option>
@@ -425,20 +426,19 @@ if (isset($_POST['exportar'])) {
 
         <!-- Sección para Mostrar Pilotos por Década -->
         <section>
-    <h2>Pilotos por Década</h2>
-    <?php
-        if (isset($_SESSION['importacion']) && $_SESSION['importacion']['estado'] === true) {
-            if ($conn->select_db('decadas')) {
-                mostrarTablas($conn);
-            } else {
-                echo "<p>No se pudo seleccionar la base de datos 'decadas'.</p>";
-            }
-        } else {
-            echo "<p>Importa un archivo CSV para mostrar las tablas.</p>";
-        }
-    ?>
-</section>
-
+            <h2>Pilotos por Década</h2>
+            <?php
+                if (isset($_SESSION['importacion']) && $_SESSION['importacion']['estado'] === true) {
+                    if ($conn->select_db('decadas')) {
+                        mostrarTablas($conn);
+                    } else {
+                        echo "<p>No se pudo seleccionar la base de datos 'decadas'.</p>";
+                    }
+                } else {
+                    echo "<p>Importa un archivo CSV para mostrar las tablas.</p>";
+                }
+            ?>
+        </section>
     </main>
 </body>
 </html>
