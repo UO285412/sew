@@ -145,6 +145,7 @@ main > section:nth-of-type(2) > article {
 
 /* Contenedor para SVG */
 /*Especificidad  (013)*/
+/*El color de fondo se hereda de body*/
 main > section:nth-of-type(3) > figure {
   margin-top: 1rem;
   padding: 1rem;
@@ -219,14 +220,9 @@ header > button {
 
 /* Especificidad (002) */
 p + article {
-  /* Selector para el contenedor carrusel de fotos en la ventana de viajes */
-  display: grid;
-  place-items: center;
-
   width: 100%;
   max-width: 100vh;
   height: 70vh;
-  
   position: relative;
   overflow: hidden; /* <===  */
   border-radius: 1em;
@@ -235,9 +231,9 @@ p + article {
 /* Especificidad (003) */
 p + article h3 {
   width: 100%;
+  text-align: center;
   margin-bottom: 0.5em;
-  position: absolute;
-  bottom: 94%;
+  font-size: 2em;
 }
 
 /* Especificidad (003) */
@@ -251,21 +247,20 @@ p + article img {
   border-radius: 0.5em;
   aspect-ratio: 16 / 9;
 }
-
+/*El color de fondo se hereda de body*/
 /* Especificidad (003) */
 p + article button {
   position: absolute;
-  width: 2em;
-  height: 2em;
+  width: 3em;
+  height: 3rem;
   padding: 0.5em;
   border: none;
-  border-radius: 50%;
-  z-index: 10;
   cursor: pointer;
   background-color: #fff;
   /* color: #FFFFFFFF; heredado de body */
   font-size: 1em;
   display: flex;
+  border-radius: 80%;
   flex-direction: column;
   align-items:center;
   justify-content: center;

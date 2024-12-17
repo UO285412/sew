@@ -9,8 +9,8 @@ class Agenda {
         $.ajax({
             url: this.apiUrl,
             dataType: 'json',
-            success: (data) => {
-                this.procesarDatos(data);
+            success: (info) => {
+                this.procesarDatos(info);
             },
             error: (jqXHR, textStatus, errorThrown) => {
                 console.error('Error al obtener los datos:', textStatus, errorThrown);

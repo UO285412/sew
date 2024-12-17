@@ -85,7 +85,7 @@ class Moneda {
  
 	<link rel="stylesheet" type="text/css" href="estilo/estilo.css" />
 	<link rel="stylesheet" type="text/css" href="estilo/layout.css" />
-	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.11.0/mapbox-gl.css" />
+	<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" />
 	<link rel="icon" href="multimedia/imagenes/favicon.ico" />
 
 	<script src="js/viajes.js"></script>

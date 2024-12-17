@@ -23,7 +23,8 @@ class Viajes {
         this.latitude = position.coords.latitude;
         this.longitude = position.coords.longitude;
         this.displayPosition();
-      
+        this.displayStaticMap(); // Añade esta línea
+        this.displayDynamicMap(); // Y esta línea
     }
 
     handleError(error) {

@@ -39,7 +39,7 @@ class Noticias {
         // Sección de información del archivo
         const seccionInfo = document.createElement("section");
         const tituloInfo = document.createElement("h2");
-        tituloInfo.textContent = "Información del archivo";
+   
         seccionInfo.appendChild(tituloInfo);
 
         this.nombreArchivo = document.createElement("p");
@@ -60,7 +60,7 @@ class Noticias {
         this.areaVisualizacion.setAttribute("aria-label", "Área de visualización del contenido");
         
         this.errorArchivo = document.createElement("p");
-        this.errorArchivo.style.color = "red"; // Mensaje de error en rojo
+      
         
         seccionContenido.append(this.areaVisualizacion, this.errorArchivo);
      

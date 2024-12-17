@@ -337,24 +337,9 @@ class Circuito {
 
     }
 
-    // Método para mostrar errores
-    mostrarError(mensaje) {
-        const errorPara = document.createElement('p');
-        errorPara.textContent = mensaje;
-        errorPara.style.color = 'red'; // Es razonable para mensajes de error
-        errorPara.style.fontSize = '1rem'; // Tamaño de fuente relativo
-        errorPara.style.margin = '1rem'; // Margen relativo
-        // Añadir el mensaje al contenedor XML
-        const displayContainer = document.querySelector("main > section:nth-of-type(1) > article");
-        if (displayContainer) {
-            displayContainer.appendChild(errorPara);
-        } else {
-            document.body.appendChild(errorPara);
-        }
-    }
+  
 }
 
-// Inicializar la clase Circuito sin llamar a funciones fuera de métodos
 (() => {
     new Circuito();
 })();
