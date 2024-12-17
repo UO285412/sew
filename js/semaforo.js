@@ -170,6 +170,6 @@ class Semaforo {
         const main = document.querySelector('main');
         this.semaforoSection.appendChild(form);
         console.log("Formulario de récord creado.");
-    }
+        }
 }
 

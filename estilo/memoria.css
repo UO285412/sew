@@ -21,7 +21,7 @@ main > section > button {
 /*Especificidad (0,0,2)*/
 /* Estilo de cada carta */
 section > article {
-    background-color: #FAFAFA;
+    background-color: #fafafa;
     width: 100%;
     aspect-ratio: 2/1;
     border-radius: 0.5rem;
