@@ -4,7 +4,7 @@ main > section {
     grid-template-columns: repeat(4, 20%);
     grid-template-rows: auto auto auto auto;
     justify-items: center;
-    gap: 2% 2%;
+    gap: 2rem 2rem; /* Espaciado entre filas y columnas */
     align-items: center;
     justify-content: center;
 }
